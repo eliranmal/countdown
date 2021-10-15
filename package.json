@@ -30,6 +30,7 @@
     "test": "react-scripts test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b gh-deploy -d build",
+    "preserve": "env PUBLIC_URL=http://localhost:5000 npm run build",
     "serve": "npx serve -s build",
     "eject": "react-scripts eject"
   },
