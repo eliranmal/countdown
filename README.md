@@ -1,5 +1,8 @@
 # countdown
 
+![countdown banner][countdown-repo-banner]
+
+
 ## overview
 
 countdown is a [song][countdown-spotify] by [john coltrane][jc-website], but also a backwards counting timer app.
@@ -38,6 +41,7 @@ besides the [commands available out of the box][create-react-app-scripts] (`star
 
 
 
+[countdown-repo-banner]: /assets/banner/banner.png
 [countdown-spotify]: https://open.spotify.com/album/4jTDjHLMFCHWrjuP1qmCf4?highlight=spotify:track:7aubHMiL85lZyppYOOwbwu
 [jc-website]: https://www.johncoltrane.com/
 [redhat-website]: https://www.redhat.com/en
