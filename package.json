@@ -2,6 +2,7 @@
   "name": "countdown",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://eliranmal.github.io/countdown/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -29,6 +30,7 @@
     "test": "react-scripts test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b gh-deploy -d build",
+    "serve": "npx serve -s build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
