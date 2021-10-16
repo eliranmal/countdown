@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-// import logo from './logo.svg';
 import {loadObject, saveObject} from './lib/storage'
 import {serialize} from './lib/object'
 import timer from './lib/timer'
@@ -72,16 +71,6 @@ function App() {
           <button className="App-button-clear" onMouseDown={() => countdownTimer.clear() && setState({...state, ...countdownTimer.getState()})}></button>
         </nav>
       </main>
-      {/*
-      <div>
-        <pre>
-          state: {serialize(state, null, 2)}
-        </pre>
-        <pre>
-          laps: {serialize(laps, null, 2)}
-        </pre>
-      </div>
-      */}
     </div>
   );
 }
