@@ -3,30 +3,21 @@ import {patch} from './object'
 // the result of: new Date(1970, 0, 1).getTime()
 const EPOCH = -7200000
 
-const initialState = {
-  // todo - remove these defaults
-  startTime: EPOCH,
-  endTime: EPOCH,
-}
-
 // todo - optionally accept a storage object with known crud api, and compse it
 const init = ({
   direction = 'up',
   duration = 30 * 1000,
   threshold = 10 * 1000,
-} = {}, stateSnapshot = {}) => {
+} = {}, stateSnapshot = {}, eventsSnapshot) => {
 
-  const state = {
-    ...initialState,
-    ...stateSnapshot,
-  }
-  const laps = []
+  let laps = []
+  let state = stateSnapshot ?? {}
 
   // {
   //   type: 'play|stop|pause|resume|lap',
   //   timestamp: 210010010010000,
   // }
-  let events = []
+  let events = eventsSnapshot ?? []
 
   const setState = newState => patch(state, newState)
   const setLaps = newLaps => patch(laps, newLaps)
@@ -42,6 +33,7 @@ const init = ({
   .map(val => val)
 
 
+  const getEvents = () => events
   const getState = () => state
   const getLaps = () => resolveLaps(state, events)
 
@@ -88,7 +80,7 @@ const init = ({
   time => state.running && setState({endTime: time, running: false}))
   const lap = command('lap',
   time => state.running && !state.paused && setLaps([...laps, time]))
-  const clear = () => !state.running && setState(initialState) && (events = [])
+  const clear = () => !state.running && (state = {}) && (events = [])
 
   return {
     start,
@@ -99,6 +91,7 @@ const init = ({
     clear,
     getState,
     getLaps,
+    getEvents,
     getEllapsedTime,
     getEllapsedTimeString,
   }
