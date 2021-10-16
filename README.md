@@ -38,6 +38,9 @@ besides the [commands available out of the box][create-react-app-scripts] (`star
 - **`serve`** - builds the project and launches a local node.js server.
 
 
+## attribution
+
+icons grabbed from [Dryicons][icons-attribution].
 
 
 
@@ -50,3 +53,4 @@ besides the [commands available out of the box][create-react-app-scripts] (`star
 [node-js-website]: https://nodejs.org/en/
 [create-react-app-website]: https://create-react-app.dev/
 [create-react-app-scripts]: https://create-react-app.dev/docs/available-scripts
+[icons-attribution]: https://dryicons.com/free-icons/player-button
