@@ -1,28 +1,71 @@
+:root {
+  --redhat: #cb2026;
+}
+
 .App {
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 5vmin;
+  font-size: 1.2em;
   white-space: wrap;
   word-wrap: break-word;
-  padding: 5vmax;
-  font-size: 1.2em;
+  color: var(--redhat);
+  background: #0a0a07 url("./images/banner.png") no-repeat 0 100%;
+  background-size: contain;
 }
 
-.App-main,
-.App-header {
-  text-align: center;
+.App .App-title {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  white-space: nowrap;
+  text-align: left;
+  font-size: calc(1em + 16vmax);
+  opacity: .3;
 }
 
-.App hr {
-  margin: 1em 0;
+.App .App-main,
+.App .App-controls {
+  text-align: right;
 }
 
-.App-header h1 {
-  font-size: 3em;
-}
-
-.App-header button {
-  font-size: 1.2em;
-}
-
-.App-main pre {
+.App .App-time-counter {
   line-height: 0;
-  font-size: calc(20px + 5vmax);
+  font-size: calc(5vh + 5vmax);
+}
+
+.App-controls [class^="App-button-"] {
+  display: inline-block;
+  width: 5em;
+  height: 5em;
+  margin-inline-end: 1em;
+  border: 3px solid var(--redhat);
+  border-radius: 2.5em;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 40%;
+  background-color: transparent;
+  cursor: pointer;
+}
+.App-controls .App-button-start {
+  background-image: url("./images/icons/play.svg");
+}
+.App-controls .App-button-pause {
+  background-image: url("./images/icons/pause.svg");
+}
+.App-controls .App-button-resume {
+  background-image: url("./images/icons/eject.svg");
+  transform: rotate(90deg);
+}
+.App-controls .App-button-stop {
+  background-image: url("./images/icons/stop.svg");
+}
+.App-controls .App-button-lap {
+  background-image: url("./images/icons/rotate.svg");
+  background-size: 55%;
+  transform: rotate(-90deg);
+}
+.App-controls .App-button-clear {
+  background-image: url("./images/icons/io.svg");
+  background-size: 55%;
 }
