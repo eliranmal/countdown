@@ -5,10 +5,10 @@ import {serialize} from './lib/object'
 import timer from './lib/timer'
 import './App.css';
 
-let countdownTimer = timer({
+const timerConfig = {
   direction: 'down',
-  duration: 1000 * 2,
-})
+}
+let countdownTimer = timer(timerConfig)
 
 function App() {
 
@@ -21,12 +21,15 @@ function App() {
     const appState = loadObject('countdown-state')
     setState(appState.state)
     setLaps(appState.laps)
+    countdownTimer = timer(timerConfig, appState.state, appState.events)
+    console.log('countdownTimer', countdownTimer)
   }, [])
 
   useEffect(() => {
     // when the tab is closed/refreshed, save application state to storage
     const unloadListener = saveObject.bind(null, 'countdown-state', {
       state: countdownTimer.getState(),
+      events: countdownTimer.getEvents(),
       laps: countdownTimer.getLaps(),
     })
     window.addEventListener('beforeunload', unloadListener)
@@ -51,25 +54,25 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1 className="App-title">countdown</h1>
-
-        {/* todo - bind keyboard events */}
-        <button onMouseDown={() => countdownTimer.start() && setState({...state, ...countdownTimer.getState()})}>start</button>
-        <button onMouseDown={() => countdownTimer.pause() && setState({...state, ...countdownTimer.getState()})}>pause</button>
-        <button onMouseDown={() => countdownTimer.resume() && setState({...state, ...countdownTimer.getState()})}>resume</button>
-        <button onMouseDown={() => countdownTimer.stop() && setState({...state, ...countdownTimer.getState()})}>stop</button>
-        <button onMouseDown={() => countdownTimer.lap() && setState({...state, ...countdownTimer.getState()})}>lap</button>
-        <button onMouseDown={() => countdownTimer.clear() && setState({...state, ...countdownTimer.getState()})}>clear</button>
       </header>
-      <hr/>
       <main className="App-main">
         <code>
           {(countdownTimer.getLaps() || []).map(lapData => <p>{lapData}</p>)}
         </code>
-        <pre>
+        <pre className="App-time-counter">
           {ellapsedTime}
         </pre>
+        <nav className="App-controls">
+
+          {/* todo - bind keyboard events */}
+          {/* todo - don't setState, do it more selectively. what do we really need here? */}
+          <button className={`App-button-${state.running ? state.paused ? 'resume' : 'pause' : 'start'}`} onMouseDown={() => countdownTimer[state.running ? state.paused ? 'resume' : 'pause' : 'start']() && setState({...state, ...countdownTimer.getState()})}></button>
+          <button className="App-button-stop" onMouseDown={() => countdownTimer.stop() && setState({...state, ...countdownTimer.getState()})}></button>
+          <button className="App-button-lap" onMouseDown={() => countdownTimer.lap() && setState({...state, ...countdownTimer.getState()})}></button>
+          <button className="App-button-clear" onMouseDown={() => countdownTimer.clear() && setState({...state, ...countdownTimer.getState()})}></button>
+        </nav>
       </main>
-      <hr/>
+      {/*
       <div>
         <pre>
           state: {serialize(state, null, 2)}
@@ -78,6 +81,7 @@ function App() {
           laps: {serialize(laps, null, 2)}
         </pre>
       </div>
+      */}
     </div>
   );
 }
