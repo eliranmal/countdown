@@ -1,6 +1,14 @@
 :root {
   --redhat: #cb2026;
+
+  background-image: url("./images/icons/play.svg"),
+    url("./images/icons/pause.svg"),
+    url("./images/icons/eject.svg"),
+    url("./images/icons/stop.svg"),
+    url("./images/icons/rotate.svg"),
+    url("./images/icons/io.svg");
 }
+
 
 .App {
   box-sizing: border-box;
