@@ -11,7 +11,7 @@ the timer has an accurate implementation that ~fights~ ignores the inherent time
 
 it's built using [react.js][reactjs-website], and deployed with the help of [gh-pages][gh-pages-repo].
 
-this project is a part of my job application process at [redhat][redhat-website].
+this project is a part of my [job application][job-application-image] process at [redhat][redhat-website].
 
 
 ## development
@@ -45,6 +45,8 @@ icons grabbed from [dryicons][icons-attribution].
 
 
 [countdown-repo-banner]: /src/images/banner.png
+[job-application-image]: /assets/redhat-job-application-process.png
+
 [countdown-spotify]: https://open.spotify.com/album/4jTDjHLMFCHWrjuP1qmCf4?highlight=spotify:track:7aubHMiL85lZyppYOOwbwu
 [jc-website]: https://www.johncoltrane.com/
 [redhat-website]: https://www.redhat.com/en
