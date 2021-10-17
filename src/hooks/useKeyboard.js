@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 
 
 const useKeyboard = () => {
-  const [key, setKey] = useState()
+  const [key, setKey] = useState({})
 
   useEffect(() => {
     const keyListener = ({keyCode: code}) => setKey({code})
