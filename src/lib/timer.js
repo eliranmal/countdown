@@ -62,7 +62,7 @@ const init = ({
       parseSegment(time / 1000 / 60),
       parseSegment(time / 1000),
       parseSegment(time % 1000, 3),
-    ].join(':')}`
+    ].join(':')} `
   }
 
   const command = (type, callback) => (time = Date.now()) => callback(time) && events.push({
