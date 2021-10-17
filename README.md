@@ -7,7 +7,7 @@
 
 countdown is a [song][countdown-spotify] by [john coltrane][jc-website], but also a backwards counting timer app (this one!).
 
-it has an accurate implementation that fights the inherent time drift javascript timers has, and is designed to keep going even if the page is refreshed or the tab is closed.
+the timer has an accurate implementation that ~fights~ ignores the inherent time drift javascript timers has, and is designed to keep going even if the page is refreshed or the tab is closed.
 
 it's built using [react.js][reactjs-website], and deployed with the help of [gh-pages][gh-pages-repo].
 
