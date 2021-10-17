@@ -1,6 +1,9 @@
 :root {
   --redhat: #cb2026;
+}
 
+:root:after {
+  /* pre-load icons, for better experience on state changes */
   background-image: url("./images/icons/play.svg"),
     url("./images/icons/pause.svg"),
     url("./images/icons/eject.svg"),
