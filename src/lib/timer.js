@@ -1,44 +1,32 @@
 import {patch} from './object'
 
-// todo - optionally accept a storage object with known crud api, and compse it
 const init = ({
   direction = 'up',
   duration = 30 * 1000,
+  // todo - implement
   threshold = 10 * 1000,
 } = {}, stateSnapshot, eventsSnapshot) => {
 
-  let laps = []
   let state = stateSnapshot ?? {}
-
-  // {
-  //   type: 'play|stop|pause|resume|lap',
-  //   timestamp: 210010010010000,
-  // }
   let events = eventsSnapshot ?? []
 
   const setState = newState => (state = newState)
   const patchState = newState => patch(state, newState)
-  const setLaps = newLaps => (laps = newLaps)
   const setEvents = newEvents => (events = newEvents)
 
-  const resolveLaps = (lapTimestamps = []) => lapTimestamps
-    .map(time => time)
+  const resolveLaps = () => events
+    .filter(({type}) => type === 'lap')
+    .map(({timestamp}) => timestamp)
   // todo - use reduce to compare prev time and curr time, and add that as 'duration'
-
-  // ----------------------------------------------------------------
-  // todo - extract method (see below) and continue from there
-  // .filter(({type}) => type === 'lap')
-  // .map(val => val)
 
 
   const getEvents = () => events ?? []
   const getState = () => state ?? {}
-  const getLaps = () => resolveLaps(events
-    .filter(({type}) => type === 'lap')
-    .map(({timestamp}) => timestamp))
+  const getLaps = resolveLaps
 
   const _getEllapsedTime = () => events
-  // todo - extract some of this to a utilty that transforms the absolute data (global timestamps) to relative data (the timer period sums), then share with resolveLaps()
+  // todo - extract some of this to a utilty that transforms the absolute data
+  // (global timestamps) to relative data (the timer period sums), then share with resolveLaps()
   .filter(({type}) => ['start', 'stop', 'pause', 'resume'].includes(type))
   .reduce((accum, {timestamp, type}, index, arr) => {
     const {timestamp: prevTimestamp, type: prevType} = arr[index - 1] ?? {}
@@ -65,10 +53,13 @@ const init = ({
     ].join(':')} `
   }
 
-  const command = (type, callback) => (time = Date.now()) => callback(time) && events.push({
-    type,
-    timestamp: time,
-  })
+  const command = (type, actionFn = () => {}, eventPredicate = () => 1) => (time = Date.now()) => {
+    actionFn(time)
+    eventPredicate() && events.push({
+      type,
+      timestamp: time,
+    })
+  }
 
   const start = command(
     'start',
@@ -84,8 +75,9 @@ const init = ({
     time => state.running && patchState({running: false}))
   const lap = command(
     'lap',
-    time => state.running && !state.paused && laps.push(time))
-  const clear = () => !state.running && setLaps([]) && setState({}) && setEvents([])
+    void 0,
+    () => state.running && !state.paused)
+  const clear = () => !state.running && setState({}) && setEvents([])
 
   return {
     start,
