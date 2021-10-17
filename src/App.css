@@ -1,3 +1,4 @@
+
 :root {
   --redhat: #cb2026;
 }
@@ -13,49 +14,69 @@
 }
 
 
+html,
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .App {
   box-sizing: border-box;
   height: 100vh;
-  padding: 5vmin;
+  padding: 10vmin;
   font-size: 1.2em;
-  white-space: wrap;
-  word-wrap: break-word;
   color: var(--redhat);
   background: #0a0a07 url("./images/banner.png") no-repeat 0 100%;
-  background-size: contain;
+  background-size: 100vmin;
 }
 
 .App .App-title {
   position: absolute;
-  bottom: 0;
-  margin: 0;
+  top: 0;
+  right: 0;
+  margin: 0 .6em;
+  width: 0;
   white-space: nowrap;
-  font-size: calc(1em + 10vmax);
-  opacity: .3;
+  font-size: calc(1em + 10vmin);
+  font-weight: 100;
+  letter-spacing: -.1em;
+  font-family: helvetica, arial, sans-serif;
+  opacity: .2;
+  transform: rotate(90deg);
 }
 
-.App .App-main,
-.App .App-controls {
-  text-align: right;
+.App .App-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .App .App-time-display {
   line-height: 0;
-  font-size: calc(7vh + 5vmax);
+  font-size: calc(1em + 7vmax);
+  font-family: consolas, "Courier New", monospace;
+  color: #aaa;
 }
 
-.App-controls [class^="App-button-"] {
-  display: inline-block;
-  width: 5em;
-  height: 5em;
-  margin-inline-end: 1em;
+.App .App-laps-display {
+
+}
+
+.App .App-controls [class^="App-button-"] {
+  width: calc(1em + 5vmax);
+  height: calc(1em + 5vmax);
+  margin-inline-end: 2vmax;
   border: 3px solid var(--redhat);
-  border-radius: 2.5em;
+  border-radius: 50%;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 40%;
   background-color: transparent;
   cursor: pointer;
+  opacity: .7;
+}
+.App .App-controls [class^="App-button-"]:last-of-type {
+  margin-inline-end: 0;
 }
 .App-controls .App-button-start {
   background-image: url("./images/icons/play.svg");
