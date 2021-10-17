@@ -19,8 +19,7 @@
   bottom: 0;
   margin: 0;
   white-space: nowrap;
-  text-align: left;
-  font-size: calc(1em + 16vmax);
+  font-size: calc(1em + 10vmax);
   opacity: .3;
 }
 
@@ -29,9 +28,9 @@
   text-align: right;
 }
 
-.App .App-time-counter {
+.App .App-time-display {
   line-height: 0;
-  font-size: calc(5vh + 5vmax);
+  font-size: calc(7vh + 5vmax);
 }
 
 .App-controls [class^="App-button-"] {
