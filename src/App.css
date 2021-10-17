@@ -22,6 +22,9 @@ body {
 }
 
 .App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   height: 100vh;
   padding: 10vmin;
@@ -50,6 +53,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: -15vmin;
 }
 
 .App .App-time-display {
