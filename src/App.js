@@ -49,6 +49,12 @@ function App() {
     }
   }, [state])
 
+  const renderFlippingButton = command => (<button
+    title={command}
+    className={`App-button-${command}`}
+    onMouseDown={() => countdownTimer[command]() && setState({...state, ...countdownTimer.getState()})}
+  ></button>)
+
   return (
     <div className="App">
       <header className="App-header">
@@ -65,10 +71,10 @@ function App() {
 
           {/* todo - bind keyboard events */}
           {/* todo - don't setState, do it more selectively. what do we really need here? */}
-          <button className={`App-button-${state.running ? state.paused ? 'resume' : 'pause' : 'start'}`} onMouseDown={() => countdownTimer[state.running ? state.paused ? 'resume' : 'pause' : 'start']() && setState({...state, ...countdownTimer.getState()})}></button>
-          <button className="App-button-stop" onMouseDown={() => countdownTimer.stop() && setState({...state, ...countdownTimer.getState()})}></button>
-          <button className="App-button-lap" onMouseDown={() => countdownTimer.lap() && setState({...state, ...countdownTimer.getState()})}></button>
-          <button className="App-button-clear" onMouseDown={() => countdownTimer.clear() && setState({...state, ...countdownTimer.getState()})}></button>
+          {renderFlippingButton(state.running ? state.paused ? 'resume' : 'pause' : 'start')}
+          <button title="stop" className="App-button-stop" onMouseDown={() => countdownTimer.stop() && setState({...state, ...countdownTimer.getState()})}></button>
+          <button title="lap" className="App-button-lap" onMouseDown={() => countdownTimer.lap() && setState({...state, ...countdownTimer.getState()})}></button>
+          <button title="clear" className="App-button-clear" onMouseDown={() => countdownTimer.clear() && setState({...state, ...countdownTimer.getState()})}></button>
         </nav>
       </main>
     </div>
