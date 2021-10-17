@@ -32,7 +32,7 @@ this project is a part of my job application process at [redhat][redhat-website]
 ### workflow
 
 this project was bootstrapped with [create-react-app][create-react-app-website], so all development workflows are executed via npm commands, by running `npm run [command]`.
-besides the [commands available out of the box][create-react-app-scripts] (`start`, `test` and `build`), it has the additional following commands:
+besides the [commands available out of the box][create-react-app-scripts] (`start`, `test` and `build`), it has the additional following ones:
 
 - **`deploy`** - builds the project and uploads the artifact to github.io.
 - **`serve`** - builds the project and launches a local node.js server.
