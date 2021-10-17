@@ -44,13 +44,17 @@ function App() {
       callback()
     }}></button>)
 
-  const key = useKeyboard()
-  // switch (key.code) {
-  //   case 32: // spacebar
-  //     break
-  //   case 8: // backspace
-  //     break
-  // }
+  useKeyboard(({code}) => {
+    switch (code) {
+      case 32: // spacebar
+        countdownTimer.lap()
+        break
+      case 8: // backspace
+        countdownTimer.abortLap()
+        break
+    }
+    patchUnmarshalledTimerState()
+  })
 
   useAnimationFrame(
     () => setEllapsedTime(countdownTimer.getEllapsedTimeString()),
