@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import useLocalStorage from 'use-local-storage'
 import {loadObject, saveObject} from './lib/storage'
+import useKeyboard from './hooks/useKeyboard'
+import useAnimationFrame from './hooks/useAnimationFrame'
 import colors from './lib/colors'
 import timer from './lib/timer'
 import './App.css'
@@ -42,17 +44,18 @@ function App() {
       callback()
     }}></button>)
 
-  useEffect(() => {
-    let reqId = window.requestAnimationFrame(function step() {
-      setEllapsedTime(countdownTimer.getEllapsedTimeString())
-      if (timerState.running && !timerState.paused) {
-        reqId = window.requestAnimationFrame(step)
-      }
-    })
-    return () => {
-      window.cancelAnimationFrame(reqId)
-    }
-  }, [timerState.running, timerState.paused])
+  const key = useKeyboard()
+  // switch (key.code) {
+  //   case 32: // spacebar
+  //     break
+  //   case 8: // backspace
+  //     break
+  // }
+
+  useAnimationFrame(
+    () => setEllapsedTime(countdownTimer.getEllapsedTimeString()),
+    () => !timerState.running || timerState.paused,
+    [timerState.running, timerState.paused])
 
   return (
     <div className="App">
@@ -62,7 +65,6 @@ function App() {
       <main className="App-main">
         <pre className="App-time-display">{ellapsedTime}</pre>
         <nav className="App-controls">
-          {/* todo - bind keyboard events */}
           {renderButton(
             timerState.running ?
               timerState.paused ? 'resume' : 'pause' :
