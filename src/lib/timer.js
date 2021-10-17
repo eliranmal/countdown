@@ -14,7 +14,6 @@ const init = ({
   const patchState = newState => patch(state, newState)
   const setEvents = newEvents => (events = newEvents)
 
-  // fixme - figure out why the first lap is not sent (at least the first click does nothing...)
   const resolveLaps = () => events
     .reduce((accum, {type, timestamp}, index, arr) => {
       const {type: prevType, timestamp: prevTimestamp} = arr[index - 1] ?? {}
@@ -82,6 +81,12 @@ const init = ({
     'lap',
     void 0,
     () => state.running && !state.paused)
+  const abortLap = () => {
+    if (state.running && !state.paused &&
+      (events[events.length - 1] || {}).type === 'lap') {
+      events.pop()
+    }
+  }
   const clear = () => !state.running && setState({}) && setEvents([])
 
   return {
@@ -90,6 +95,7 @@ const init = ({
     resume,
     stop,
     lap,
+    abortLap,
     clear,
     getState,
     getLaps,
