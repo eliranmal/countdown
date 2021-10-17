@@ -31,7 +31,7 @@ this project is a part of my job application process at [redhat][redhat-website]
 
 ### workflow
 
-this project was bootstrapped with [create-react-app][create-react-app-website], so all development workflows are executed via npm commands, by running `npm run [command]`.
+this project was bootstrapped with [create-react-app][create-react-app-website], so all development workflows are executed via [npm commands][npm-commands-docs], by running `npm run [command]`.
 besides the [commands available out of the box][create-react-app-scripts] (`start`, `test` and `build`), it has the additional following ones:
 
 - **`deploy`** - builds the project and uploads the artifact to github.io.
@@ -53,4 +53,5 @@ icons grabbed from [Dryicons][icons-attribution].
 [node-js-website]: https://nodejs.org/en/
 [create-react-app-website]: https://create-react-app.dev/
 [create-react-app-scripts]: https://create-react-app.dev/docs/available-scripts
+[npm-commands-docs]: https://docs.npmjs.com/cli/v7/commands
 [icons-attribution]: https://dryicons.com/free-icons/player-button
