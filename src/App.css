@@ -78,7 +78,7 @@ body {
   width: 0;
   background-color: #fff;
   border-right: 3px solid var(--black);
-  opacity: .3;
+  opacity: .5;
   transition: width 1s ease-in-out;
 }
 

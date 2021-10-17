@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import useLocalStorage from 'use-local-storage'
 import {loadObject, saveObject} from './lib/storage'
-import * as colors from 'material-ui-colors'
+import colors from './lib/colors'
 import timer from './lib/timer'
 import './App.css'
 
@@ -12,8 +12,8 @@ function App() {
 
   const countdownTimer = timer({
     direction: 'down',
-    duration: 1000 * 10, // todo - expose as input
-    threshold: 1000 * 10, // todo - expose as input
+    duration: 1000 * 12, // todo - expose as input
+    threshold: 1000 * 10, // todo - expose as input, and implement!
   }, timerState, timerEvents)
 
   const [laps, setLaps] = useState(countdownTimer.getLaps())
@@ -75,7 +75,7 @@ function App() {
               key={key}
               className="App-laps-item"
               style={{
-                backgroundColor: colors.red[500],
+                backgroundColor: colors.flatMap[key],
                 width: `${duration / (arr.reduce((accum, {duration}) => (accum += duration), 0) / 100)}%`
               }}
               >&nbsp;</span>)}
