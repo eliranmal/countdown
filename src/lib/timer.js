@@ -19,8 +19,9 @@ const init = ({
     .reduce((accum, {type, timestamp}, index, arr) => {
       const {type: prevType, timestamp: prevTimestamp} = arr[index - 1] ?? {}
       if (prevType === 'lap' && ['lap', 'stop', 'pause'].includes(type)) {
-        accum && accum.push({
-          startTime: timestamp,
+        accum.push({
+          endTime: timestamp,
+          startTime: prevTimestamp,
           duration: timestamp - prevTimestamp,
         })
       }

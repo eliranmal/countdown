@@ -75,11 +75,11 @@ body {
 
 .App .App-laps-item {
   display: inline-block;
-  width: 0;
+  padding: 0;
   background-color: #fff;
   border-right: 3px solid var(--black);
   opacity: .5;
-  transition: width 1s ease-in-out;
+  transition: padding 1s ease-in-out;
 }
 
 .App .App-laps-item:last-of-type {
@@ -123,4 +123,14 @@ body {
 .App-controls .App-button-clear {
   background-image: url("./images/icons/io.svg");
   background-size: 55%;
+}
+
+
+.spinning {
+  animation: spin 2s steps(15) infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg) }
+  to { transform: rotate(360deg) }
 }

@@ -16,22 +16,27 @@ function App() {
     threshold: 1000 * 10, // todo - expose as input, and implement!
   }, timerState, timerEvents)
 
-  const [laps, setLaps] = useState(countdownTimer.getLaps())
+  const [laps, setLaps] = useState(countdownTimer.getLaps() ?? [])
   const [ellapsedTime, setEllapsedTime] = useState(countdownTimer.getEllapsedTimeString())
 
-  const timerPatchUnmarshall = () => {
+  const patchUnmarshalledTimerState = () => {
     setTimerState({...timerState, ...countdownTimer.getState()})
     setTimerEvents([...countdownTimer.getEvents()])
+    setLaps([...countdownTimer.getLaps()])
   }
 
-  const timerSetUnmarshall = () => {
+  const setUnmarshalledTimerState = () => {
     setTimerState({...countdownTimer.getState()})
     setTimerEvents([...countdownTimer.getEvents()])
+    setLaps([...countdownTimer.getLaps()])
   }
 
-  const renderButton = (command, callback = timerPatchUnmarshall) => (<button
+  const renderButton = (command, callback = patchUnmarshalledTimerState) => (<button
     title={command}
-    className={`App-button-${command}`}
+    className={`App-button-${command}  ${
+      command === 'lap' &&
+      (timerEvents[timerEvents.length - 1] || {}).type === 'lap' ? 'spinning' : ''
+    }`}
     onMouseDown={() => {
       countdownTimer[command]()
       callback()
@@ -58,27 +63,23 @@ function App() {
         <pre className="App-time-display">{ellapsedTime}</pre>
         <nav className="App-controls">
           {/* todo - bind keyboard events */}
-          {renderButton(timerState.running ? timerState.paused ? 'resume' : 'pause' : 'start')}
+          {renderButton(
+            timerState.running ?
+              timerState.paused ? 'resume' : 'pause' :
+                'start')}
           {renderButton('stop')}
-          {renderButton('lap', () => {
-            timerPatchUnmarshall()
-            setLaps([...countdownTimer.getLaps()])
-          })}
-          {renderButton('clear', () => {
-            timerSetUnmarshall()
-            setLaps([...countdownTimer.getLaps()])
-          })}
+          {renderButton('lap')}
+          {renderButton('clear', setUnmarshalledTimerState)}
         </nav>
         <div className="App-laps-display">
-          {(laps || [])
-            .map(({startTime, duration}, key, arr) => <span
-              key={key}
-              className="App-laps-item"
-              style={{
-                backgroundColor: colors.flatMap[key],
-                width: `${duration / (arr.reduce((accum, {duration}) => (accum += duration), 0) / 100)}%`
-              }}
-              >&nbsp;</span>)}
+          {laps.map(({startTime, endTime, duration}, key, arr) => (<span
+            key={key}
+            className="App-laps-item"
+            style={{
+              backgroundColor: colors.flatMap[key],
+              paddingLeft: `${duration / (arr.reduce((accum, {duration}) => (accum += duration), 0) / 100)}%`
+            }}
+            >&nbsp;</span>))}
         </div>
       </main>
     </div>
