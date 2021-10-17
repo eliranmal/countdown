@@ -40,7 +40,7 @@ besides the [commands available out of the box][create-react-app-scripts] (`star
 
 ## attribution
 
-icons grabbed from [Dryicons][icons-attribution].
+icons grabbed from [dryicons][icons-attribution].
 
 
 
