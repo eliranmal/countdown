@@ -1,6 +1,7 @@
 
 :root {
   --redhat: #cb2026;
+  --black: #0a0a07;
 }
 
 :root:after {
@@ -26,7 +27,7 @@ body {
   padding: 10vmin;
   font-size: 1.2em;
   color: var(--redhat);
-  background: #0a0a07 url("./images/banner.png") no-repeat 0 100%;
+  background: var(--black) url("./images/banner.png") no-repeat 0 100%;
   background-size: 100vmin;
 }
 
@@ -52,6 +53,9 @@ body {
 }
 
 .App .App-time-display {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
   line-height: 0;
   font-size: calc(1em + 7vmax);
   font-family: consolas, "Courier New", monospace;
@@ -59,7 +63,27 @@ body {
 }
 
 .App .App-laps-display {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3vmin;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  transition: all 1s ease-in-out;
+}
 
+.App .App-laps-item {
+  display: inline-block;
+  width: 0;
+  background-color: #fff;
+  border-right: 3px solid var(--black);
+  opacity: .3;
+  transition: width 1s ease-in-out;
+}
+
+.App .App-laps-item:last-of-type {
+  border-right: 0 none;
 }
 
 .App .App-controls [class^="App-button-"] {

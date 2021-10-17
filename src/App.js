@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import useLocalStorage from 'use-local-storage'
 import {loadObject, saveObject} from './lib/storage'
+import * as colors from 'material-ui-colors'
 import timer from './lib/timer'
 import './App.css'
 
@@ -68,10 +69,17 @@ function App() {
             setLaps([...countdownTimer.getLaps()])
           })}
         </nav>
-        <code className="App-laps-display">
+        <div className="App-laps-display">
           {(laps || [])
-            .map((lapData, key) => <p key={key}>{lapData}</p>)}
-        </code>
+            .map(({startTime, duration}, key, arr) => <span
+              key={key}
+              className="App-laps-item"
+              style={{
+                backgroundColor: colors.red[500],
+                width: `${duration / (arr.reduce((accum, {duration}) => (accum += duration), 0) / 100)}%`
+              }}
+              >&nbsp;</span>)}
+        </div>
       </main>
     </div>
   );
