@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/countdown/static/css/main.9eb33b2c.chunk.css",
-    "main.js": "/countdown/static/js/main.843120c5.chunk.js",
-    "main.js.map": "/countdown/static/js/main.843120c5.chunk.js.map",
-    "runtime-main.js": "/countdown/static/js/runtime-main.e8906035.js",
-    "runtime-main.js.map": "/countdown/static/js/runtime-main.e8906035.js.map",
-    "static/js/2.933f3116.chunk.js": "/countdown/static/js/2.933f3116.chunk.js",
-    "static/js/2.933f3116.chunk.js.map": "/countdown/static/js/2.933f3116.chunk.js.map",
-    "static/js/3.335733f4.chunk.js": "/countdown/static/js/3.335733f4.chunk.js",
-    "static/js/3.335733f4.chunk.js.map": "/countdown/static/js/3.335733f4.chunk.js.map",
+    "main.css": "/countdown/static/css/main.a171479d.chunk.css",
+    "main.js": "/countdown/static/js/main.a926a514.chunk.js",
+    "main.js.map": "/countdown/static/js/main.a926a514.chunk.js.map",
+    "runtime-main.js": "/countdown/static/js/runtime-main.92824e1d.js",
+    "runtime-main.js.map": "/countdown/static/js/runtime-main.92824e1d.js.map",
+    "static/js/2.8162ecec.chunk.js": "/countdown/static/js/2.8162ecec.chunk.js",
+    "static/js/2.8162ecec.chunk.js.map": "/countdown/static/js/2.8162ecec.chunk.js.map",
+    "static/js/3.0e29c16f.chunk.js": "/countdown/static/js/3.0e29c16f.chunk.js",
+    "static/js/3.0e29c16f.chunk.js.map": "/countdown/static/js/3.0e29c16f.chunk.js.map",
     "index.html": "/countdown/index.html",
     "service-worker.js": "/countdown/service-worker.js",
     "service-worker.js.map": "/countdown/service-worker.js.map",
-    "static/css/main.9eb33b2c.chunk.css.map": "/countdown/static/css/main.9eb33b2c.chunk.css.map",
-    "static/js/2.933f3116.chunk.js.LICENSE.txt": "/countdown/static/js/2.933f3116.chunk.js.LICENSE.txt",
+    "static/css/main.a171479d.chunk.css.map": "/countdown/static/css/main.a171479d.chunk.css.map",
+    "static/js/2.8162ecec.chunk.js.LICENSE.txt": "/countdown/static/js/2.8162ecec.chunk.js.LICENSE.txt",
     "static/media/App.css": "/countdown/static/media/stop.09dd4ffb.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.e8906035.js",
-    "static/js/2.933f3116.chunk.js",
-    "static/css/main.9eb33b2c.chunk.css",
-    "static/js/main.843120c5.chunk.js"
+    "static/js/runtime-main.92824e1d.js",
+    "static/js/2.8162ecec.chunk.js",
+    "static/css/main.a171479d.chunk.css",
+    "static/js/main.a926a514.chunk.js"
   ]
 }
