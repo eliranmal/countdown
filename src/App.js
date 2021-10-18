@@ -2,20 +2,26 @@ import React, {useState} from 'react'
 import useLocalStorage from 'use-local-storage'
 import useKeyboard from './hooks/useKeyboard'
 import useAnimationFrame from './hooks/useAnimationFrame'
-import colors from './lib/colors'
+import {durationAsMap, mapAsDuration} from './lib/util'
 import timer from './lib/timer'
+import colors from './lib/colors'
 import './App.css'
 
 function App() {
 
-  const [timerDuration, setTimerDuration] = useLocalStorage('timer-duration', 1000 * 12)
+  const [timerDuration, setTimerDuration] = useLocalStorage('timer-duration', {
+    hours: 0,
+    minutes: 0,
+    seconds: 12,
+    milliseconds: 345,
+  })
 
   const [timerState, setTimerState] = useLocalStorage('timer-state', {})
   const [timerEvents, setTimerEvents] = useLocalStorage('timer-events', [])
 
   const countdownTimer = timer({
     direction: 'down',
-    duration: timerDuration, // todo - expose as input
+    duration: mapAsDuration(timerDuration), // todo - expose as input
     threshold: 1000 * 10, // todo - expose as input, and implement!
   }, timerState, timerEvents)
 
@@ -47,6 +53,16 @@ function App() {
       callback()
     }}></button>)
 
+  const renderTimeSegmentInput = segmentKey => (<input type="number"
+    className={`App-duration-input App-duration-input-${segmentKey}`}
+    value={timerDuration[segmentKey]}
+    onChange={(e) => setTimerDuration({
+      ...timerDuration,
+      [segmentKey]: +e.target.value,
+    })} />)
+
+
+
   useKeyboard(({code}) => {
     switch (code) {
       case 32: // spacebar
@@ -65,6 +81,7 @@ function App() {
     () => !timerState.running || timerState.paused,
     [timerState.running, timerState.paused])
 
+
   return (
     <div className="App">
       <header className="App-header">
@@ -75,7 +92,13 @@ function App() {
       </div>
       {editMode ?
       (<div className="App-config-modal">
-        <input type="time" className="App-duration-input" />
+        <div className="App-duration-box">
+          {/* todo - add labels etc. */}
+          {renderTimeSegmentInput('hours')}
+          {renderTimeSegmentInput('minutes')}
+          {renderTimeSegmentInput('seconds')}
+          {renderTimeSegmentInput('milliseconds')}
+        </div>
       </div>
       ) : (
       <main className="App-main">

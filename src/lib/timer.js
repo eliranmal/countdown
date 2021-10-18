@@ -1,4 +1,5 @@
 import {patch} from './object'
+import {durationAsString} from './util'
 
 const init = ({
   direction = 'up',
@@ -46,16 +47,7 @@ const init = ({
 
   const getEllapsedTime = (ellapsedTime = _getEllapsedTime()) => direction === 'up' ? ellapsedTime : duration - ellapsedTime
 
-  const getEllapsedTimeString = () => {
-    const time = getEllapsedTime()
-    const pad = (str, length = 2) => `${str}`.padStart(length, '0')
-    const parseSegment = (timestamp, padLength) => pad(Math.abs(Math[time < 0 ? 'ceil' : 'floor'](timestamp)), padLength)
-    return `${time < 0 ? '-' : ' '}${[
-      parseSegment(time / 1000 / 60 / 60),
-      parseSegment((time / 1000 / 60) % 60),
-      parseSegment((time / 1000) % 60),
-    ].join(':')}.${parseSegment(time % 1000, 3)} `
-  }
+  const getEllapsedTimeString = () => durationAsString(getEllapsedTime())
 
   const command = (type, actionFn = () => {}, eventPredicate = () => 1) => (time = Date.now()) => {
     actionFn(time)
