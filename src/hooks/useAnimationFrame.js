@@ -12,6 +12,7 @@ const useAnimationFrame = (tickCallback = () => {}, stopPredicate = () => 1, dep
     return () => {
       window.cancelAnimationFrame(reqId)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies)
 }
 

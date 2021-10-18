@@ -90,6 +90,8 @@ function App() {
         countdownTimer.abortLap()
         patchUnmarshalledTimerState()
         break
+      default:
+        break
     }
   })
 
