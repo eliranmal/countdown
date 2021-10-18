@@ -9,6 +9,12 @@ import './App.css'
 
 function App() {
 
+  const [timerThreshold, setTimerThreshold] = useLocalStorage('timer-threshold', {
+    hours: 0,
+    minutes: 0,
+    seconds: 3,
+    milliseconds: 45,
+  })
   const [timerDuration, setTimerDuration] = useLocalStorage('timer-duration', {
     hours: 0,
     minutes: 0,
@@ -53,14 +59,22 @@ function App() {
       callback()
     }}></button>)
 
-  const renderTimeSegmentInput = segmentKey => (<input type="number"
-    className={`App-duration-input App-duration-input-${segmentKey}`}
-    value={timerDuration[segmentKey]}
-    onChange={(e) => setTimerDuration({
+  const renderTimeSegmentInput = (segmentKey, timeObj, onChange) => (<input type="number"
+    className={`App-config-input App-config-input-${segmentKey}`}
+    value={timeObj[segmentKey]}
+    onChange={onChange} />)
+
+  const renderDurationTimeSegmentInput = segmentKey => renderTimeSegmentInput(
+    segmentKey, timerDuration, e => setTimerDuration({
       ...timerDuration,
       [segmentKey]: +e.target.value,
-    })} />)
+    }))
 
+  const renderThresholdTimeSegmentInput = segmentKey => renderTimeSegmentInput(
+    segmentKey, timerThreshold, e => setTimerThreshold({
+      ...timerThreshold,
+      [segmentKey]: +e.target.value,
+    }))
 
 
   useKeyboard(({code}) => {
@@ -92,12 +106,19 @@ function App() {
       </div>
       {editMode ?
       (<div className="App-config-modal">
-        <div className="App-duration-box">
-          {/* todo - add labels etc. */}
-          {renderTimeSegmentInput('hours')}
-          {renderTimeSegmentInput('minutes')}
-          {renderTimeSegmentInput('seconds')}
-          {renderTimeSegmentInput('milliseconds')}
+        <label className="App-config-label">threshold</label>
+        <div className="App-config-box">
+          {renderThresholdTimeSegmentInput('hours')}
+          {renderThresholdTimeSegmentInput('minutes')}
+          {renderThresholdTimeSegmentInput('seconds')}
+          {renderThresholdTimeSegmentInput('milliseconds')}
+        </div>
+        <label className="App-config-label">duration</label>
+        <div className="App-config-box">
+          {renderDurationTimeSegmentInput('hours')}
+          {renderDurationTimeSegmentInput('minutes')}
+          {renderDurationTimeSegmentInput('seconds')}
+          {renderDurationTimeSegmentInput('milliseconds')}
         </div>
       </div>
       ) : (
