@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import useLocalStorage from 'use-local-storage'
 import useKeyboard from './hooks/useKeyboard'
 import useAnimationFrame from './hooks/useAnimationFrame'
-import {mapAsDuration} from './lib/util'
+import {mapAsDuration, durationAsString} from './lib/util'
 import timer from './lib/timer'
 import colors from './lib/colors'
 import './App.css'
@@ -146,7 +146,11 @@ function App() {
               backgroundColor: colors.flatMap[key],
               paddingLeft: `${duration / (arr.reduce((accum, {duration}) => (accum += duration), 0) / 100)}%`
             }}
-            >&nbsp;</span>))}
+            title={`
+start time: ${new Date(startTime).toLocaleString()}
+end time: ${new Date(endTime).toLocaleString()}
+duration: ${durationAsString(duration)}`
+          }>&nbsp;</span>))}
         </div>
       </main>
       )}
