@@ -4,8 +4,7 @@ import {durationAsString} from './util'
 const init = ({
   direction = 'up',
   duration = 30 * 1000,
-  // todo - implement
-  threshold = 10 * 1000,
+  threshold = 5 * 1000,
 } = {}, stateSnapshot, eventsSnapshot) => {
 
   let state = stateSnapshot ?? {}

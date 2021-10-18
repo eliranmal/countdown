@@ -27,8 +27,8 @@ function App() {
 
   const countdownTimer = timer({
     direction: 'down',
-    duration: mapAsDuration(timerDuration), // todo - expose as input
-    threshold: 1000 * 10, // todo - expose as input, and implement!
+    duration: mapAsDuration(timerDuration),
+    threshold: mapAsDuration(timerThreshold),
   }, timerState, timerEvents)
 
   const [laps, setLaps] = useState(countdownTimer.getLaps() ?? [])
@@ -50,10 +50,13 @@ function App() {
 
   const renderButton = (command, callback = patchUnmarshalledTimerState) => (<button
     title={command}
-    className={`App-button-${command}  ${
+    className={`App-button-${command} ${
       command === 'lap' &&
-      (timerEvents[timerEvents.length - 1] || {}).type === 'lap' ? 'spinning' : ''
+      (timerEvents[timerEvents.length - 1] || {}).type === 'lap' ? 'spinPulse' : ''
     }`}
+    style={{
+      '--pulse-delay': `${mapAsDuration(timerThreshold)}ms`,
+    }}
     onMouseDown={() => {
       countdownTimer[command] && countdownTimer[command]()
       callback()

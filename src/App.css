@@ -174,7 +174,7 @@ body {
 }
 .App .App-button-lap {
   background-image: url("./images/icons/rotate.svg");
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
 }
 .App .App-button-config {
   background-image: url("./images/icons/cog.svg");
@@ -184,11 +184,30 @@ body {
 }
 
 
-.spinning {
-  animation: spin 2s steps(15) infinite;
+.spinPulse {
+  animation:  spin 2s linear,
+              pulse 4s linear var(--pulse-delay) infinite;
+  animation-fill-mode: forwards;
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg) }
-  to { transform: rotate(360deg) }
+  from { transform: rotate(-270deg) }
+  to { transform: rotate(90deg) }
+}
+
+@keyframes pulse {
+	0% {
+		transform: rotate(-270deg) scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	10% {
+		transform: rotate(-270deg) scale(1);
+		box-shadow: 0 0 0 10px rgba(200, 200, 200, 0.3);
+	}
+
+	100% {
+		transform: rotate(-270deg) scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
 }
