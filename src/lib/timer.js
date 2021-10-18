@@ -47,7 +47,7 @@ const init = ({
 
   const getEllapsedTime = (ellapsedTime = _getEllapsedTime()) => direction === 'up' ? ellapsedTime : duration - ellapsedTime
 
-  const getEllapsedTimeString = () => durationAsString(getEllapsedTime())
+  const getEllapsedTimeString = () => durationAsString(getEllapsedTime(), true)
 
   const command = (type, actionFn = () => {}, eventPredicate = () => 1) => (time = Date.now()) => {
     actionFn(time)
