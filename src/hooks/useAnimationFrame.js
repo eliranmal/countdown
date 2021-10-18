@@ -1,5 +1,5 @@
 
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 
 const useAnimationFrame = (tickCallback = () => {}, stopPredicate = () => 1, dependencies) => {
   useEffect(() => {

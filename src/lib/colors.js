@@ -1,5 +1,6 @@
 import * as materialUiColors from 'material-ui-colors'
 
+
 const colorNames = [
   'red',
   'pink',
@@ -40,7 +41,6 @@ const colorLevels = [
 ]
 
 function* generateIterator() {
-  const colorNamesLength = colorNames.length
   let count = 0
   for (let level of colorLevels) {
     for (let name of colorNames) {
@@ -55,7 +55,10 @@ const flattenColorMap = () => [].concat(...colorLevels
   .map(level => colorNames
     .map(name => materialUiColors[name][level])))
 
-export default {
+const api = {
   flatMap: flattenColorMap(),
   iterator: generateIterator(),
 }
+
+
+export default api

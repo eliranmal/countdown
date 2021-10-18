@@ -11,7 +11,8 @@
     url("./images/icons/eject.svg"),
     url("./images/icons/stop.svg"),
     url("./images/icons/rotate.svg"),
-    url("./images/icons/io.svg");
+    url("./images/icons/io.svg"),
+    url("./images/icons/cog.svg");
 }
 
 
@@ -49,11 +50,47 @@ body {
   transform: rotate(90deg);
 }
 
-.App .App-main {
+.App-top-menu {
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  margin: 2em;
+}
+
+.App .App-main,
+.App .App-config-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.App .App-main {
   margin-top: -15vmin;
+}
+
+.App .App-config-modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 3em;
+  padding: 3em;
+  background-color: #444;
+  opacity: .7;
+}
+
+.App .App-duration-input {
+  width: 70%;
+  margin: 1em 0;
+  font-size: calc(1em + 3vmax);
+  padding: .1em;
+  padding-left: 1em;
+  border-radius: .7em;
+  border: 0 none;
+  outline: 0 none;
+  background-color: white;
 }
 
 .App .App-time-display {
@@ -90,7 +127,7 @@ body {
   border-right: 0 none;
 }
 
-.App .App-controls [class^="App-button-"] {
+.App [class^="App-button-"] {
   width: calc(1em + 5vmax);
   height: calc(1em + 5vmax);
   margin-inline-end: 2vmax;
@@ -99,34 +136,35 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 40%;
-  background-color: transparent;
+  background-color: var(--black);
   cursor: pointer;
   opacity: .7;
 }
-.App .App-controls [class^="App-button-"]:last-of-type {
+.App [class^="App-button-"]:last-of-type {
   margin-inline-end: 0;
 }
-.App-controls .App-button-start {
+.App .App-button-start {
   background-image: url("./images/icons/play.svg");
 }
-.App-controls .App-button-pause {
+.App .App-button-pause {
   background-image: url("./images/icons/pause.svg");
 }
-.App-controls .App-button-resume {
+.App .App-button-resume {
   background-image: url("./images/icons/eject.svg");
   transform: rotate(90deg);
 }
-.App-controls .App-button-stop {
+.App .App-button-stop {
   background-image: url("./images/icons/stop.svg");
 }
-.App-controls .App-button-lap {
+.App .App-button-lap {
   background-image: url("./images/icons/rotate.svg");
-  background-size: 55%;
   transform: rotate(-90deg);
 }
-.App-controls .App-button-clear {
+.App .App-button-config {
+  background-image: url("./images/icons/cog.svg");
+}
+.App .App-button-clear {
   background-image: url("./images/icons/io.svg");
-  background-size: 55%;
 }
 
 

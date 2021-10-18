@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import useLocalStorage from 'use-local-storage'
-import {loadObject, saveObject} from './lib/storage'
 import useKeyboard from './hooks/useKeyboard'
 import useAnimationFrame from './hooks/useAnimationFrame'
 import colors from './lib/colors'
@@ -9,17 +8,21 @@ import './App.css'
 
 function App() {
 
+  const [timerDuration, setTimerDuration] = useLocalStorage('timer-duration', 1000 * 12)
+
   const [timerState, setTimerState] = useLocalStorage('timer-state', {})
   const [timerEvents, setTimerEvents] = useLocalStorage('timer-events', [])
 
   const countdownTimer = timer({
     direction: 'down',
-    duration: 1000 * 12, // todo - expose as input
+    duration: timerDuration, // todo - expose as input
     threshold: 1000 * 10, // todo - expose as input, and implement!
   }, timerState, timerEvents)
 
   const [laps, setLaps] = useState(countdownTimer.getLaps() ?? [])
   const [ellapsedTime, setEllapsedTime] = useState(countdownTimer.getEllapsedTimeString())
+
+  const [editMode, setEditMode] = useState(false)
 
   const patchUnmarshalledTimerState = () => {
     setTimerState({...timerState, ...countdownTimer.getState()})
@@ -40,7 +43,7 @@ function App() {
       (timerEvents[timerEvents.length - 1] || {}).type === 'lap' ? 'spinning' : ''
     }`}
     onMouseDown={() => {
-      countdownTimer[command]()
+      countdownTimer[command] && countdownTimer[command]()
       callback()
     }}></button>)
 
@@ -48,12 +51,13 @@ function App() {
     switch (code) {
       case 32: // spacebar
         countdownTimer.lap()
+        patchUnmarshalledTimerState()
         break
       case 8: // backspace
         countdownTimer.abortLap()
+        patchUnmarshalledTimerState()
         break
     }
-    patchUnmarshalledTimerState()
   })
 
   useAnimationFrame(
@@ -66,7 +70,16 @@ function App() {
       <header className="App-header">
         <h1 className="App-title">countdown</h1>
       </header>
+      <div className="App-top-menu">
+        {renderButton('config', () => setEditMode(!editMode))}
+      </div>
+      {editMode ?
+      (<div className="App-config-modal">
+        <input type="time" className="App-duration-input" />
+      </div>
+      ) : (
       <main className="App-main">
+
         <pre className="App-time-display">{ellapsedTime}</pre>
         <nav className="App-controls">
           {renderButton(
@@ -77,6 +90,7 @@ function App() {
           {renderButton('lap')}
           {renderButton('clear', setUnmarshalledTimerState)}
         </nav>
+
         <div className="App-laps-display">
           {laps.map(({startTime, endTime, duration}, key, arr) => (<span
             key={key}
@@ -88,6 +102,7 @@ function App() {
             >&nbsp;</span>))}
         </div>
       </main>
+      )}
     </div>
   );
 }
