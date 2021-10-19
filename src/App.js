@@ -49,7 +49,7 @@ function App() {
     setLaps([...countdownTimer.getLaps()])
   }
 
-  const renderButton = (command, callback = patchUnmarshalledTimerState) => (<button
+  const renderButton = (command, callback = patchUnmarshalledTimerState, customProps = {}) => (<button
     data-tip={command}
     className={`App-button-${command} ${
       command === 'lap' &&
@@ -61,7 +61,9 @@ function App() {
     onMouseDown={() => {
       countdownTimer[command] && countdownTimer[command]()
       callback()
-    }}></button>)
+    }}
+    {...customProps}
+    ></button>)
 
   const renderTimeSegmentInput = (segmentKey, timeObj, onChange) => (<input type="number"
     className={`App-config-input App-config-input-${segmentKey}`}
@@ -106,29 +108,26 @@ function App() {
     <div className="App">
       <ReactTooltip
         effect="solid"
+        border
         multiline
       />
       <header className="App-header">
         <h1 className="App-title">countdown</h1>
       </header>
       <div className="App-top-menu">
-        {renderButton('config', () => setEditMode(!editMode))}
+        {renderButton('config', () => setEditMode(!editMode), {'data-place': 'bottom'})}
       </div>
       {editMode ?
       (<div className="App-config-modal">
         <label className="App-config-label">threshold</label>
         <div className="App-config-box">
-          {renderThresholdTimeSegmentInput('hours')}
-          {renderThresholdTimeSegmentInput('minutes')}
-          {renderThresholdTimeSegmentInput('seconds')}
-          {renderThresholdTimeSegmentInput('milliseconds')}
+          {['hours', 'minutes', 'seconds', 'milliseconds']
+              .map(renderThresholdTimeSegmentInput)}
         </div>
         <label className="App-config-label">duration</label>
         <div className="App-config-box">
-          {renderDurationTimeSegmentInput('hours')}
-          {renderDurationTimeSegmentInput('minutes')}
-          {renderDurationTimeSegmentInput('seconds')}
-          {renderDurationTimeSegmentInput('milliseconds')}
+          {['hours', 'minutes', 'seconds', 'milliseconds']
+              .map(renderDurationTimeSegmentInput)}
         </div>
       </div>
       ) : (
@@ -158,7 +157,6 @@ start time: ${new Date(startTime).toLocaleString()}<br/>
 end time: ${new Date(endTime).toLocaleString()}<br/>
 duration: ${durationAsString(duration)}<br/>`
             }
-
             >&nbsp;</span>))}
         </div>
       </main>
