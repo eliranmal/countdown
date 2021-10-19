@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/countdown/static/css/main.2b8bce2d.chunk.css",
+    "main.css": "/countdown/static/css/main.74938373.chunk.css",
     "main.js": "/countdown/static/js/main.b0f0c20d.chunk.js",
     "main.js.map": "/countdown/static/js/main.b0f0c20d.chunk.js.map",
     "runtime-main.js": "/countdown/static/js/runtime-main.7f05b5e9.js",
@@ -12,14 +12,14 @@
     "index.html": "/countdown/index.html",
     "service-worker.js": "/countdown/service-worker.js",
     "service-worker.js.map": "/countdown/service-worker.js.map",
-    "static/css/main.2b8bce2d.chunk.css.map": "/countdown/static/css/main.2b8bce2d.chunk.css.map",
+    "static/css/main.74938373.chunk.css.map": "/countdown/static/css/main.74938373.chunk.css.map",
     "static/js/2.4559d313.chunk.js.LICENSE.txt": "/countdown/static/js/2.4559d313.chunk.js.LICENSE.txt",
     "static/media/App.css": "/countdown/static/media/stop.09dd4ffb.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.7f05b5e9.js",
     "static/js/2.4559d313.chunk.js",
-    "static/css/main.2b8bce2d.chunk.css",
+    "static/css/main.74938373.chunk.css",
     "static/js/main.b0f0c20d.chunk.js"
   ]
 }
