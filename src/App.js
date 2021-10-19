@@ -5,6 +5,7 @@ import useAnimationFrame from './hooks/useAnimationFrame'
 import {mapAsDuration, durationAsString} from './lib/util'
 import timer from './lib/timer'
 import colors from './lib/colors'
+import ReactTooltip from 'react-tooltip'
 import './App.css'
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
   }
 
   const renderButton = (command, callback = patchUnmarshalledTimerState) => (<button
-    title={command}
+    data-tip={command}
     className={`App-button-${command} ${
       command === 'lap' &&
       (timerEvents[timerEvents.length - 1] || {}).type === 'lap' ? 'spinPulse' : ''
@@ -103,6 +104,10 @@ function App() {
 
   return (
     <div className="App">
+      <ReactTooltip
+        effect="solid"
+        multiline
+      />
       <header className="App-header">
         <h1 className="App-title">countdown</h1>
       </header>
@@ -148,11 +153,13 @@ function App() {
               backgroundColor: colors.flatMap[key],
               paddingLeft: `${duration / (arr.reduce((accum, {duration}) => (accum += duration), 0) / 100)}%`
             }}
-            title={`
-start time: ${new Date(startTime).toLocaleString()}
-end time: ${new Date(endTime).toLocaleString()}
-duration: ${durationAsString(duration)}`
-          }>&nbsp;</span>))}
+            data-tip={`
+start time: ${new Date(startTime).toLocaleString()}<br/>
+end time: ${new Date(endTime).toLocaleString()}<br/>
+duration: ${durationAsString(duration)}<br/>`
+            }
+
+            >&nbsp;</span>))}
         </div>
       </main>
       )}
