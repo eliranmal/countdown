@@ -11,6 +11,9 @@ on:
 
   workflow_dispatch:
 
+env:
+  CI: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,8 +23,8 @@ jobs:
       - name: install dependencies
         run: npm ci
 
-      - name: run build
-        run: env CI=false npm run build
+      - name: build project
+        run: npm run build
   test:
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +35,16 @@ jobs:
 
       - name: run tests
         run: npm test
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: build project
+        run: npm run build
 
       - name: deploy to github pages
         uses: peaceiris/actions-gh-pages@v3
