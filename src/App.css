@@ -1,8 +1,13 @@
 
+/* global properties */
+
 :root {
   --redhat: #cb2026;
   --black: #0a0a07;
 }
+
+
+/* caching/preloading */
 
 :root:after {
   /* pre-load icons, for better experience on state changes */
@@ -16,11 +21,16 @@
 }
 
 
+/* base styles */
+
 html,
 body {
   height: 100vh;
   overflow: hidden;
 }
+
+
+/* layout / shell */
 
 .App {
   display: flex;
@@ -69,6 +79,9 @@ body {
   margin-top: -15vmin;
 }
 
+
+/* config / settings */
+
 .App .App-config-modal {
   position: absolute;
   top: 0;
@@ -109,6 +122,9 @@ body {
   border-radius: 0;
 }
 
+
+/* time display */
+
 .App .App-time-display {
   display: flex;
   justify-content: stretch;
@@ -119,11 +135,15 @@ body {
   color: #aaa;
 }
 
+
+/* laps display */
+
 .App .App-laps-display {
+  --laps-height: 3vmin;
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 3vmin;
+  height: var(--laps-height);
   display: flex;
   justify-content: stretch;
   align-items: stretch;
@@ -139,6 +159,10 @@ body {
   transition: padding 1s ease-in-out;
 }
 
+.App .App-laps-item:last-of-type {
+  border-right: 0 none;
+}
+
 /* a little pseudo flag for each lap :) */
 .App .App-laps-item:before,
 .App .App-laps-item:after {
@@ -150,25 +174,26 @@ body {
   background-color: #fff;
 }
 .App .App-laps-item:before {
-    height: 3em;
-    width: .1em;
+    height: calc(var(--laps-height) * 3.333);
+    width: calc(var(--laps-height) * .1);
     z-index: 1;
 }
 .App .App-laps-item:after {
-    bottom: 2em;
-    box-sizing: border-box;
-    width: 2em;
-    height: 1em;
-    border-color: transparent transparent transparent red;
-    border-style: solid;
-    border-width: .5em .25em .5em 1.75em;
-    background-color: transparent;
+  box-sizing: border-box;
+  bottom: calc(var(--laps-height) * 2);
+  width: calc(var(--laps-height) * 2.667);
+  height: calc(var(--laps-height) * 1.333);
+  border-color: transparent transparent transparent red;
+  border-style: solid;
+  border-width: calc(var(--laps-height) * .667)
+                calc(var(--laps-height) * 0)
+                calc(var(--laps-height) * .667)
+                calc(var(--laps-height) * 2.667);
+  background-color: transparent;
 }
 
 
-.App .App-laps-item:last-of-type {
-  border-right: 0 none;
-}
+/* buttons */
 
 .App [class^="App-button-"] {
   width: calc(1em + 5vmax);
@@ -186,6 +211,7 @@ body {
 .App [class^="App-button-"]:last-of-type {
   margin-inline-end: 0;
 }
+/* icons */
 .App .App-button-start {
   background-image: url("./images/icons/play.svg");
 }
@@ -219,6 +245,8 @@ body {
   animation-fill-mode: forwards;
 }
 
+
+/* animations */
 
 .spinPulse {
   animation:  spin 2s linear,
