@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: run build
-        run: npm run build
+        run: env CI=false npm run build
   test:
     runs-on: ubuntu-latest
     steps:
