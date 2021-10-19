@@ -20,8 +20,11 @@ jobs:
       - name: install dependencies
         run: npm i
 
+      - name: prepare environment
+        run: npm ci
+
       - name: run build
-        run: env CI= npm run build
+        run: npm run build
   test:
     runs-on: ubuntu-latest
     steps:
