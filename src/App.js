@@ -115,7 +115,9 @@ function App() {
         <h1 className="App-title">countdown</h1>
       </header>
       <div className="App-top-menu">
-        {renderButton('config', () => setEditMode(!editMode), {'data-place': 'bottom'})}
+        {renderButton('config', () => setEditMode(!editMode), {
+          'data-place': 'bottom',
+        })}
       </div>
       {editMode ?
       (<div className="App-config-modal">
