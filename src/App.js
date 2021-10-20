@@ -50,15 +50,24 @@ function App() {
     setLaps([...countdownTimer.getLaps()])
   }
 
+  // todo - extract map values to a dedicated module for icons
   const commandIconMap = {
-    start: { name: 'play', size: '50%' },
-    pause: { name: 'pause', size: '50%' },
-    resume: { name: 'eject', size: '50%' },
-    stop: { name: 'stop', size: '50%' },
-    lap: { name: 'rotate', size: '60%', style: {
-      marginTop: '-5%',
+    start: { name: 'play', size: '45%', style: {
+      marginRight: '-6%',
     }},
-    clear: { name: 'io', size: '60%' },
+    pause: { name: 'pause', size: '45%' },
+    resume: { name: 'eject', size: '45%', style: {
+      marginRight: '-6%',
+      transform: 'rotate(90deg)',
+    }},
+    stop: { name: 'stop', size: '45%' },
+    lap: { name: 'rotate', size: '60%', style: {
+      marginRight: '-6%',
+      transform: 'rotate(90deg)',
+    }},
+    clear: { name: 'io', size: '60%', style: {
+      marginTop: '-6%',
+    } },
     config: { name: 'cog', size: '55%' },
   }
 
@@ -120,6 +129,7 @@ function App() {
   return (
     <div className="App">
       <ReactTooltip
+        place="bottom"
         effect="solid"
         border
         multiline
@@ -128,9 +138,7 @@ function App() {
         <h1 className="App-title">countdown</h1>
       </header>
       <div className="App-top-menu">
-        {renderButton('config', () => setEditMode(!editMode), {
-          'data-place': 'bottom',
-        })}
+        {renderButton('config', () => setEditMode(!editMode))}
       </div>
       {editMode ?
       (<div className="App-config-modal">
