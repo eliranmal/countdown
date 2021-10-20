@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react'
 import {iterator as colors} from '../../lib/colors'
+import './Icon.css'
 
 
 const Icon = ({ name, color, size = '24px', ...props }) => {
@@ -23,12 +24,13 @@ const Icon = ({ name, color, size = '24px', ...props }) => {
     const { current: IconComponent } = IconRef
 
     return <IconComponent
+      className="cd-icon"
       width={size}
       height={size}
       stroke={iconColor}
       fill={iconColor}
       {...props}
-      />
+    />
   }
 
   return <>$nbsp;</>;

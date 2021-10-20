@@ -1,0 +1,5 @@
+
+svg.cd-icon {
+  /* hide the default legacy tooltips */
+  pointer-events: none;
+}
