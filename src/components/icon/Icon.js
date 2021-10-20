@@ -16,18 +16,22 @@ const Icon = ({ name, color, size = '24px', ...props }) => {
   }, [name])
 
   if (!loading && IconRef.current) {
+    // true value signals that the icon color should be choosed internally
+    const iconColor = color === true ?
+      colors.next() :
+      color || 'var(--redhat)'
     const { current: IconComponent } = IconRef
-    const iconColor = color || colors.next().value
 
     return <IconComponent
       width={size}
       height={size}
       stroke={iconColor}
       fill={iconColor}
-       {...props} />
+      {...props}
+      />
   }
 
-  return null;
+  return <>$nbsp;</>;
 }
 
 
