@@ -4,8 +4,9 @@ import useKeyboard from './hooks/useKeyboard'
 import useAnimationFrame from './hooks/useAnimationFrame'
 import {mapAsDuration, durationAsString} from './lib/util'
 import timer from './lib/timer'
-import colors from './lib/colors'
+import {flatMap as colors} from './lib/colors'
 import ReactTooltip from 'react-tooltip'
+import Icon from './components/icon/Icon'
 import './App.css'
 
 function App() {
@@ -49,6 +50,18 @@ function App() {
     setLaps([...countdownTimer.getLaps()])
   }
 
+  const commandIconMap = {
+    start: { name: 'play', size: '50%' },
+    pause: { name: 'pause', size: '50%' },
+    resume: { name: 'eject', size: '50%' },
+    stop: { name: 'stop', size: '50%' },
+    lap: { name: 'rotate', size: '60%', style: {
+      marginTop: '-5%',
+    }},
+    clear: { name: 'io', size: '60%' },
+    config: { name: 'cog', size: '55%' },
+  }
+
   const renderButton = (command, callback = patchUnmarshalledTimerState, customProps = {}) => (<button
     data-tip={command}
     className={`App-button-${command} ${
@@ -63,7 +76,7 @@ function App() {
       callback()
     }}
     {...customProps}
-    ></button>)
+    ><Icon {...commandIconMap[command]} /></button>)
 
   const renderTimeSegmentInput = (segmentKey, timeObj, onChange) => (<input type="number"
     className={`App-config-input App-config-input-${segmentKey}`}
@@ -151,7 +164,7 @@ function App() {
             key={key}
             className="App-laps-item"
             style={{
-              backgroundColor: colors.flatMap[key],
+              backgroundColor: colors[key],
               paddingLeft: `${duration / (arr.reduce((accum, {duration}) => (accum += duration), 0) / 100)}%`
             }}
             data-tip={`

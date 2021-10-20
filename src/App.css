@@ -196,14 +196,16 @@ body {
 /* buttons */
 
 .App [class^="App-button-"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: calc(1em + 5vmax);
   height: calc(1em + 5vmax);
+  padding: 0;
   margin-inline-end: 2vmax;
   border: 3px solid var(--redhat);
   border-radius: 50%;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 40%;
+  line-height: 0;
   background-color: var(--black);
   cursor: pointer;
   opacity: .7;
