@@ -55,10 +55,7 @@ const flattenColorMap = () => [].concat(...colorLevels
   .map(level => colorNames
     .map(name => materialUiColors[name][level])))
 
-const api = {
-  flatMap: flattenColorMap(),
-  iterator: generateIterator(),
-}
 
+export const flatMap = flattenColorMap()
 
-export default api
+export const iterator = generateIterator()
