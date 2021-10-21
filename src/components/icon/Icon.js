@@ -6,7 +6,7 @@ import './Icon.css'
 
 // true value signals that the icon color should be chosen internally
 const resolveColor = color => color === true ?
-  colors.next() :
+  colors.next().value :
     color || 'var(--redhat)'
 
 const Icon = ({ name, color, size = '24px', style = {} }) => (<ReactSVG
