@@ -1,7 +1,9 @@
 import React from 'react'
+
 import Icon from '../icon/Icon'
 
 import './Button.css'
+
 
 const baseIconProps = {
   size: '50%',

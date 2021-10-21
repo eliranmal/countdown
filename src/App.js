@@ -1,11 +1,8 @@
 import React, {useState} from 'react'
 import useLocalStorage from 'use-local-storage'
-import useKeyboard from './hooks/useKeyboard'
-import useAnimationFrame from './hooks/useAnimationFrame'
-import {mapAsDuration, durationAsString} from './lib/util'
-import timer from './lib/timer'
-import {flatMap as colors} from './lib/colors'
 import ReactTooltip from 'react-tooltip'
+
+import Timer from './components/timer/Timer'
 import Button from './components/button/Button'
 
 import './App.css'
@@ -26,58 +23,7 @@ function App() {
     milliseconds: 345,
   })
 
-  const [timerState, setTimerState] = useLocalStorage('timer-state', {})
-  const [timerEvents, setTimerEvents] = useLocalStorage('timer-events', [])
-
-  const countdownTimer = timer({
-    direction: 'down',
-    duration: mapAsDuration(timerDuration),
-    threshold: mapAsDuration(timerThreshold),
-  }, timerState, timerEvents)
-
-  const [laps, setLaps] = useState(countdownTimer.getLaps() ?? [])
-  const [ellapsedTime, setEllapsedTime] = useState(countdownTimer.getEllapsedTimeString())
-
   const [editMode, setEditMode] = useState(false)
-
-  const patchUnmarshalledTimerState = () => {
-    setTimerState({...timerState, ...countdownTimer.getState()})
-    setTimerEvents([...countdownTimer.getEvents()])
-    setLaps([...countdownTimer.getLaps()])
-  }
-
-  const setUnmarshalledTimerState = () => {
-    setTimerState({...countdownTimer.getState()})
-    setTimerEvents([...countdownTimer.getEvents()])
-    setLaps([...countdownTimer.getLaps()])
-  }
-
-  const timericonPropMap = {
-    start: 'play',
-    pause: 'pause',
-    resume: 'eject',
-    stop: 'stop',
-    lap: 'rotate',
-    clear: 'io',
-  }
-
-  const renderTimerControlButton = (command, callback = patchUnmarshalledTimerState) => {
-    const isLapStarted = command === 'lap' &&
-      (timerEvents[timerEvents.length - 1] || {}).type === 'lap'
-
-    return <Button
-      icon={timericonPropMap[command]}
-      tooltip={command}
-      className={`App-control-button ${isLapStarted ? 'cd-animation-pulse' : ''}`}
-      style={isLapStarted ? {
-        '--pulse-delay': `${mapAsDuration(timerThreshold)}ms`,
-      } : null}
-      onMouseDown={() => {
-        countdownTimer[command] && countdownTimer[command]()
-        callback()
-      }}
-    />
-  }
 
   const renderTimeSegmentInput = (segmentKey, timeObj, onChange) => (<input type="number"
     className={`App-config-input App-config-input-${segmentKey}`}
@@ -95,27 +41,6 @@ function App() {
       ...timerThreshold,
       [segmentKey]: +e.target.value,
     }))
-
-
-  useKeyboard(({code}) => {
-    switch (code) {
-      case 32: // spacebar
-        countdownTimer.lap()
-        patchUnmarshalledTimerState()
-        break
-      case 8: // backspace
-        countdownTimer.abortLap()
-        patchUnmarshalledTimerState()
-        break
-      default:
-        break
-    }
-  })
-
-  useAnimationFrame(
-    () => setEllapsedTime(countdownTimer.getEllapsedTimeString()),
-    () => !timerState.running || timerState.paused,
-    [timerState.running, timerState.paused])
 
 
   return (
@@ -152,33 +77,10 @@ function App() {
       </div>
       ) : (
       <main className="App-main">
-
-        <pre className="App-time-display">{ellapsedTime}</pre>
-        <nav className="App-controls">
-          {renderTimerControlButton(
-            timerState.running ?
-              timerState.paused ? 'resume' : 'pause' :
-                'start')}
-          {renderTimerControlButton('stop')}
-          {renderTimerControlButton('lap')}
-          {renderTimerControlButton('clear', setUnmarshalledTimerState)}
-        </nav>
-
-        <div className="App-laps-display">
-          {laps.map(({startTime, endTime, duration}, key, arr) => (<span
-            key={key}
-            className="App-laps-item"
-            style={{
-              backgroundColor: colors[key],
-              paddingLeft: `${duration / (arr.reduce((accum, {duration}) => (accum += duration), 0) / 100)}%`
-            }}
-            data-tip={`
-start time: ${new Date(startTime).toLocaleString()}<br/>
-end time: ${new Date(endTime).toLocaleString()}<br/>
-duration: ${durationAsString(duration)}<br/>`
-            }
-            >&nbsp;</span>))}
-        </div>
+        <Timer
+          initialTime={timerDuration}
+          lapThreshold={timerThreshold}
+          />
       </main>
       )}
     </div>

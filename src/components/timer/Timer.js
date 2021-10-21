@@ -1,38 +1,26 @@
 import React, {useState} from 'react'
 import useLocalStorage from 'use-local-storage'
+
 import useKeyboard from '../../hooks/useKeyboard'
 import useAnimationFrame from '../../hooks/useAnimationFrame'
-import {mapAsDuration, durationAsString} from '../../lib/util'
 import timer from '../../lib/timer'
 import {flatMap as colors} from '../../lib/colors'
-import ReactTooltip from 'react-tooltip'
+import {mapAsDuration, durationAsString} from '../../lib/util'
+
 import Button from '../button/Button'
 
 import './Timer.css'
 
 
-const Timer = () => {
-
-  const [timerThreshold, setTimerThreshold] = useLocalStorage('timer-threshold', {
-    hours: 0,
-    minutes: 0,
-    seconds: 3,
-    milliseconds: 45,
-  })
-  const [timerDuration, setTimerDuration] = useLocalStorage('timer-duration', {
-    hours: 0,
-    minutes: 0,
-    seconds: 12,
-    milliseconds: 345,
-  })
+const Timer = ({initialTime, lapThreshold}) => {
 
   const [timerState, setTimerState] = useLocalStorage('timer-state', {})
   const [timerEvents, setTimerEvents] = useLocalStorage('timer-events', [])
 
   const countdownTimer = timer({
     direction: 'down',
-    duration: mapAsDuration(timerDuration),
-    threshold: mapAsDuration(timerThreshold),
+    duration: mapAsDuration(initialTime),
+    threshold: mapAsDuration(lapThreshold),
   }, timerState, timerEvents)
 
   const [laps, setLaps] = useState(countdownTimer.getLaps() ?? [])
@@ -68,7 +56,7 @@ const Timer = () => {
       tooltip={command}
       className={`cd-timer-button ${isLapStarted ? 'cd-animation-pulse' : ''}`}
       style={isLapStarted ? {
-        '--pulse-delay': `${mapAsDuration(timerThreshold)}ms`,
+        '--pulse-delay': `${mapAsDuration(lapThreshold)}ms`,
       } : null}
       onMouseDown={() => {
         countdownTimer[command] && countdownTimer[command]()
