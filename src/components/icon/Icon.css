@@ -1,5 +1,9 @@
 
-svg.cd-icon {
+.cd-icon svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  fill: var(--icon-color);
+  stroke: var(--icon-color);
   /* hide the default legacy tooltips */
   pointer-events: none;
 }
