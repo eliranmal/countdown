@@ -3,32 +3,39 @@ import Icon from '../icon/Icon'
 
 import './Button.css'
 
+const baseIconProps = {
+  size: '45%',
+  color: '#ccc',
+}
 
 const iconPropMap = {
-  play: { size: '45%', style: {
-    marginRight: '-6%',
+  play: { ...baseIconProps, style: {
+      marginRight: '-6%',
   }},
-  pause: { size: '45%' },
-  eject: { size: '45%', style: {
-    marginRight: '-6%',
-    transform: 'rotate(90deg)',
-  }},
-  stop: { size: '45%' },
-  rotate: { size: '60%', style: {
+  stop: baseIconProps,
+  pause: baseIconProps,
+  eject: { ...baseIconProps, style: {
     marginRight: '-6%',
     transform: 'rotate(90deg)',
   }},
-  io: { size: '60%', style: {
+  rotate: { ...baseIconProps, size: '60%', style: {
+    marginRight: '-6%',
+    transform: 'rotate(90deg)',
+  }},
+  io: { ...baseIconProps, size: '60%', style: {
     marginTop: '-6%',
   } },
-  cog: { size: '55%' },
+  cog: { ...baseIconProps, size: '55%' },
 }
 
 const Button = ({text = '', icon, tooltip, className, ...props}) => (<button
   data-tip={tooltip}
   className={`cd-button ${className}`}
   {...props}
-  ><Icon name={icon} {...iconPropMap[icon]} />{text}</button>)
+  >{<Icon
+    name={icon} {...(
+      icon in iconPropMap ? iconPropMap[icon] : {}
+    )} />}{text}</button>)
 
 
 export default Button
