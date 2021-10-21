@@ -4,8 +4,7 @@ import Icon from '../icon/Icon'
 import './Button.css'
 
 
-// todo - extract map values to a dedicated module for icons
-const iconMap = {
+const iconPropMap = {
   play: { size: '45%', style: {
     marginRight: '-6%',
   }},
@@ -29,7 +28,7 @@ const Button = ({text = '', icon, tooltip, className, ...props}) => (<button
   data-tip={tooltip}
   className={`cd-button ${className}`}
   {...props}
-  ><Icon name={icon} {...iconMap[icon]} />{text}</button>)
+  ><Icon name={icon} {...iconPropMap[icon]} />{text}</button>)
 
 
 export default Button

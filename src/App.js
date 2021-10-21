@@ -53,7 +53,7 @@ function App() {
     setLaps([...countdownTimer.getLaps()])
   }
 
-  const timerIconMap = {
+  const timericonPropMap = {
     start: 'play',
     pause: 'pause',
     resume: 'eject',
@@ -67,7 +67,7 @@ function App() {
       (timerEvents[timerEvents.length - 1] || {}).type === 'lap'
 
     return <Button
-      icon={timerIconMap[command]}
+      icon={timericonPropMap[command]}
       tooltip={command}
       className={`App-control-button ${isLapStarted ? 'cd-animation-pulse' : ''}`}
       style={isLapStarted ? {
@@ -124,6 +124,7 @@ function App() {
       <ReactTooltip
         place="bottom"
         effect="solid"
+        delayShow={420}
         border
         multiline
       />
