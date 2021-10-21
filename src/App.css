@@ -21,7 +21,7 @@
 }
 
 
-/* baseline / rest */
+/* baseline */
 
 html,
 body {
@@ -66,6 +66,7 @@ body {
   top: 0;
   left: 0;
   margin: calc(.5em + 1vmax);
+  transform: scale(.75);
 }
 
 .App .App-main,
