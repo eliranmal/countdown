@@ -7,20 +7,6 @@
 }
 
 
-/* caching/preloading */
-
-:root:after {
-  /* pre-load icons, for better experience on state changes */
-  background-image: url("./images/icons/play.svg"),
-    url("./images/icons/pause.svg"),
-    url("./images/icons/eject.svg"),
-    url("./images/icons/stop.svg"),
-    url("./images/icons/rotate.svg"),
-    url("./images/icons/io.svg"),
-    url("./images/icons/cog.svg");
-}
-
-
 /* baseline */
 
 html,
@@ -32,7 +18,7 @@ body {
 
 /* layout / shell */
 
-.App {
+.cd-app {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,7 +31,7 @@ body {
   background-size: 100vmin;
 }
 
-.App .App-title {
+.cd-app .cd-app-title {
   position: absolute;
   top: 0;
   right: 0;
@@ -60,7 +46,7 @@ body {
   transform: rotate(90deg);
 }
 
-.App-top-menu {
+.cd-app .cd-app-top-menu {
   position: absolute;
   z-index: 9;
   top: 0;
@@ -69,60 +55,9 @@ body {
   transform: scale(.75);
 }
 
-.App .App-main,
-.App .App-config-modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.App .App-main {
+.cd-app .cd-app-main {
   margin-top: -15vmin;
 }
-
-
-/* config / settings */
-
-.App .App-config-modal {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 3em;
-  padding: 3em;
-  color: #ccc;
-  background-color: #444;
-  opacity: .7;
-}
-
-.App .App-config-box {
-  display: flex;
-}
-
-.App .App-config-label {
-  display: inline-block;
-  width: 100%;
-  text-align: right;
-  font-size: 1.5em;
-}
-
-.App .App-config-input {
-  margin: .5em 0;
-  font-size: calc(1em + 3vmax);
-  padding: .1em;
-  padding-left: 1em;
-  border-radius: .7em;
-  border: 0 none;
-  outline: 0 none;
-  background-color: white;
-}
-
-.App .App-config-input[type="number"] {
-  width: 2em;
-  border-radius: 0;
-}
-
 
 
 /* animations */

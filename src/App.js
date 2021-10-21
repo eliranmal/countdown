@@ -2,13 +2,14 @@ import React, {useState} from 'react'
 import useLocalStorage from 'use-local-storage'
 import ReactTooltip from 'react-tooltip'
 
-import Timer from './components/timer/Timer'
+import Settings from './pages/settings/Settings'
 import Button from './components/button/Button'
+import Timer from './components/timer/Timer'
 
 import './App.css'
 
 
-function App() {
+const App = () => {
 
   const [timerThreshold, setTimerThreshold] = useLocalStorage('timer-threshold', {
     hours: 0,
@@ -25,26 +26,9 @@ function App() {
 
   const [editMode, setEditMode] = useState(false)
 
-  const renderTimeSegmentInput = (segmentKey, timeObj, onChange) => (<input type="number"
-    className={`App-config-input App-config-input-${segmentKey}`}
-    value={timeObj[segmentKey]}
-    onChange={onChange} />)
-
-  const renderDurationTimeSegmentInput = segmentKey => renderTimeSegmentInput(
-    segmentKey, timerDuration, e => setTimerDuration({
-      ...timerDuration,
-      [segmentKey]: +e.target.value,
-    }))
-
-  const renderThresholdTimeSegmentInput = segmentKey => renderTimeSegmentInput(
-    segmentKey, timerThreshold, e => setTimerThreshold({
-      ...timerThreshold,
-      [segmentKey]: +e.target.value,
-    }))
-
 
   return (
-    <div className="App">
+    <div className="cd-app">
       <ReactTooltip
         place="bottom"
         effect="solid"
@@ -52,39 +36,32 @@ function App() {
         border
         multiline
       />
-      <header className="App-header">
-        <h1 className="App-title">countdown</h1>
+      <header className="cd-app-header">
+        <h1 className="cd-app-title">countdown</h1>
       </header>
-      <div className="App-top-menu">
+      <div className="cd-app-top-menu">
         <Button
           icon="cog"
-          tooltip="config"
-          onMouseDown={() => setEditMode(!editMode)}
+          tooltip={`${editMode ? 'hide ' : 'show '}settings`}
+          onClick={() => setEditMode(!editMode)}
         />
       </div>
-      {editMode ?
-      (<div className="App-config-modal">
-        <label className="App-config-label">threshold</label>
-        <div className="App-config-box">
-          {['hours', 'minutes', 'seconds', 'milliseconds']
-              .map(renderThresholdTimeSegmentInput)}
-        </div>
-        <label className="App-config-label">duration</label>
-        <div className="App-config-box">
-          {['hours', 'minutes', 'seconds', 'milliseconds']
-              .map(renderDurationTimeSegmentInput)}
-        </div>
-      </div>
-      ) : (
-      <main className="App-main">
-        <Timer
-          initialTime={timerDuration}
-          lapThreshold={timerThreshold}
-          />
-      </main>
+      {editMode ? (<Settings
+          timerDuration={timerDuration}
+          timerThreshold={timerThreshold}
+          setTimerDuration={setTimerDuration}
+          setTimerThreshold={setTimerThreshold}
+        />) : (
+        <main className="cd-app-main">
+          <Timer
+            initialTime={timerDuration}
+            lapThreshold={timerThreshold}
+            />
+        </main>
       )}
     </div>
   );
 }
 
-export default App;
+
+export default App

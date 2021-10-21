@@ -3,8 +3,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: calc(1em + 5vmax);
-  height: calc(1em + 5vmax);
+  width: calc(1.5em + 5vmax);
+  height: calc(1.5em + 5vmax);
   padding: 0;
   border: calc(.2em + .1vmax) solid var(--redhat);
   border-radius: 50%;
