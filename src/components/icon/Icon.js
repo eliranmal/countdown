@@ -33,7 +33,7 @@ const Icon = ({ name, color, size = '24px', ...props }) => {
     />
   }
 
-  return <>$nbsp;</>;
+  return <>&nbsp;</>;
 }
 
 
