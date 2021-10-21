@@ -9,13 +9,13 @@ const resolveColor = color => color === true ?
   colors.next() :
     color || 'var(--redhat)'
 
-const Icon = ({ name, color, size = '24px', ...props }) => (<ReactSVG
+const Icon = ({ name, color, size = '24px', style = {} }) => (<ReactSVG
     src={require(`../../images/icons/${name}.svg`).default}
     className="cd-icon"
     style={{
       '--icon-size': size,
       '--icon-color': resolveColor(color),
-      ...props.style
+      ...style
     }}
   />)
 
