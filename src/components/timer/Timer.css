@@ -1,0 +1,82 @@
+
+.cd-timer-time-display {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  margin: 0;
+  line-height: 2;
+  font-size: calc(10vw - (1vmax - 3vmin));
+  font-family: consolas, "Courier New", monospace;
+  color: #aaa;
+}
+
+.cd-timer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cd-timer-controls .cd-timer-button {
+  margin-inline-end: calc(.5em + 1.5vmax);
+}
+
+.cd-timer-controls .cd-timer-button:last-of-type {
+  margin-inline-end: 0;
+}
+
+
+/* laps display */
+
+.cd-timer-laps {
+  --laps-height: 3vmin;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: var(--laps-height);
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  transition: all 1s ease-in-out;
+}
+
+.cd-timer-lap {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  background-color: #fff;
+  opacity: .5;
+  transition: padding 1s ease-in-out;
+}
+
+.cd-timer-lap:last-of-type {
+  border-right: 0 none;
+}
+
+/* a little pseudo flag for each lap :) */
+.cd-timer-lap:before,
+.cd-timer-lap:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  background-color: #fff;
+}
+.cd-timer-lap:before {
+    height: calc(var(--laps-height) * 3.333);
+    width: calc(var(--laps-height) * .1);
+    z-index: 1;
+}
+.cd-timer-lap:after {
+  box-sizing: border-box;
+  bottom: calc(var(--laps-height) * 2);
+  width: calc(var(--laps-height) * 2.667);
+  height: calc(var(--laps-height) * 1.333);
+  border-color: transparent transparent transparent red;
+  border-style: solid;
+  border-width: calc(var(--laps-height) * .667)
+                calc(var(--laps-height) * 0)
+                calc(var(--laps-height) * .667)
+                calc(var(--laps-height) * 2.667);
+  background-color: transparent;
+}
