@@ -6,7 +6,6 @@ import {mapAsDuration, durationAsString} from './lib/util'
 import timer from './lib/timer'
 import {flatMap as colors} from './lib/colors'
 import ReactTooltip from 'react-tooltip'
-import Icon from './components/icon/Icon'
 import Button from './components/button/Button'
 
 import './App.css'
