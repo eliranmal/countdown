@@ -136,37 +136,18 @@ body {
   color: #aaa;
 }
 
-
-/* buttons */
-
-.App .App-controls {
+.App-controls {
   display: flex;
   align-items: center;
   justify-items: flex-end;
 }
 
-.App [class^="App-button-"] {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(1em + 5vmax);
-  height: calc(1em + 5vmax);
-  padding: 0;
-  margin-inline-end: calc(.2em + 1.5vmax);
-  border: calc(.2em + .1vmax) solid var(--redhat);
-  border-radius: 50%;
-  line-height: 0;
-  background-color: var(--black);
-  cursor: pointer;
-  opacity: .7;
-}
-.App [class^="App-button-"]:last-of-type {
-  margin-inline-end: 0;
+.App-controls .App-control-button {
+  margin-inline-end: calc(.5em + 1.5vmax);
 }
 
-.App .App-button-config:hover {
-  animation: spin 1s ease-in-out;
-  animation-fill-mode: forwards;
+.App-controls .App-control-button:last-of-type {
+  margin-inline-end: 0;
 }
 
 
@@ -229,30 +210,34 @@ body {
 
 /* animations */
 
-.spinPulse {
-  animation:  spin 2s linear,
-              pulse 4s linear var(--pulse-delay);
+.cd-animation-spin {
+  animation: spin 2s linear;
+  animation-fill-mode: forwards;
+}
+
+.cd-animation-pulse {
+  animation: pulse 4s linear var(--pulse-delay);
   animation-fill-mode: forwards;
 }
 
 @keyframes spin {
-  from { transform: rotate(-270deg) }
-  to { transform: rotate(90deg) }
+  from { transform: rotate(0) }
+  to { transform: rotate(360deg) }
 }
 
 @keyframes pulse {
 	0% {
-		transform: rotate(-270deg) scale(0.95);
+		transform: scale(0.95);
 		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
 	}
 
 	10% {
-		transform: rotate(-270deg) scale(1);
+		transform: scale(1);
 		box-shadow: 0 0 0 10px rgba(200, 200, 200, 0.3);
 	}
 
 	100% {
-		transform: rotate(-270deg) scale(1);
+		transform: scale(1);
 		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 	}
 }

@@ -7,7 +7,10 @@ import timer from './lib/timer'
 import {flatMap as colors} from './lib/colors'
 import ReactTooltip from 'react-tooltip'
 import Icon from './components/icon/Icon'
+import Button from './components/button/Button'
+
 import './App.css'
+
 
 function App() {
 
@@ -50,42 +53,32 @@ function App() {
     setLaps([...countdownTimer.getLaps()])
   }
 
-  // todo - extract map values to a dedicated module for icons
-  const commandIconMap = {
-    start: { name: 'play', size: '45%', style: {
-      marginRight: '-6%',
-    }},
-    pause: { name: 'pause', size: '45%' },
-    resume: { name: 'eject', size: '45%', style: {
-      marginRight: '-6%',
-      transform: 'rotate(90deg)',
-    }},
-    stop: { name: 'stop', size: '45%' },
-    lap: { name: 'rotate', size: '60%', style: {
-      marginRight: '-6%',
-      transform: 'rotate(90deg)',
-    }},
-    clear: { name: 'io', size: '60%', style: {
-      marginTop: '-6%',
-    } },
-    config: { name: 'cog', size: '55%' },
+  const timerIconMap = {
+    start: 'play',
+    pause: 'pause',
+    resume: 'eject',
+    stop: 'stop',
+    lap: 'rotate',
+    clear: 'io',
   }
 
-  const renderButton = (command, callback = patchUnmarshalledTimerState, customProps = {}) => (<button
-    data-tip={command}
-    className={`App-button-${command} ${
-      command === 'lap' &&
-      (timerEvents[timerEvents.length - 1] || {}).type === 'lap' ? 'spinPulse' : ''
-    }`}
-    style={{
-      '--pulse-delay': `${mapAsDuration(timerThreshold)}ms`,
-    }}
-    onMouseDown={() => {
-      countdownTimer[command] && countdownTimer[command]()
-      callback()
-    }}
-    {...customProps}
-    ><Icon {...commandIconMap[command]} /></button>)
+  const renderTimerControlButton = (command, callback = patchUnmarshalledTimerState) => {
+    const isLapStarted = command === 'lap' &&
+      (timerEvents[timerEvents.length - 1] || {}).type === 'lap'
+
+    return <Button
+      icon={timerIconMap[command]}
+      tooltip={command}
+      className={`App-control-button ${isLapStarted ? 'cd-animation-pulse' : ''}`}
+      style={isLapStarted ? {
+        '--pulse-delay': `${mapAsDuration(timerThreshold)}ms`,
+      } : null}
+      onMouseDown={() => {
+        countdownTimer[command] && countdownTimer[command]()
+        callback()
+      }}
+    />
+  }
 
   const renderTimeSegmentInput = (segmentKey, timeObj, onChange) => (<input type="number"
     className={`App-config-input App-config-input-${segmentKey}`}
@@ -138,7 +131,11 @@ function App() {
         <h1 className="App-title">countdown</h1>
       </header>
       <div className="App-top-menu">
-        {renderButton('config', () => setEditMode(!editMode))}
+        <Button
+          icon="cog"
+          tooltip="config"
+          onMouseDown={() => setEditMode(!editMode)}
+        />
       </div>
       {editMode ?
       (<div className="App-config-modal">
@@ -158,13 +155,13 @@ function App() {
 
         <pre className="App-time-display">{ellapsedTime}</pre>
         <nav className="App-controls">
-          {renderButton(
+          {renderTimerControlButton(
             timerState.running ?
               timerState.paused ? 'resume' : 'pause' :
                 'start')}
-          {renderButton('stop')}
-          {renderButton('lap')}
-          {renderButton('clear', setUnmarshalledTimerState)}
+          {renderTimerControlButton('stop')}
+          {renderTimerControlButton('lap')}
+          {renderTimerControlButton('clear', setUnmarshalledTimerState)}
         </nav>
 
         <div className="App-laps-display">

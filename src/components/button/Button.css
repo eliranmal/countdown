@@ -1,0 +1,20 @@
+
+.cd-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(1em + 5vmax);
+  height: calc(1em + 5vmax);
+  padding: 0;
+  border: calc(.2em + .1vmax) solid var(--redhat);
+  border-radius: 50%;
+  line-height: 0;
+  background-color: var(--black);
+  cursor: pointer;
+  opacity: .7;
+}
+
+.cd-button:hover {
+  animation: spin .5s ease-in-out;
+  animation-fill-mode: both;
+}
