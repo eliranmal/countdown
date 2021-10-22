@@ -51,8 +51,19 @@ body {
   z-index: 9;
   top: 0;
   left: 0;
+  display: flex;
+  align-items: flex-start;
   margin: calc(.5em + 1vmax);
   transform: scale(.75);
+  transform-origin: 0 0;
+}
+
+.cd-app .cd-app-top-menu > * {
+  margin-inline-end: calc(.5em + 1vmax);
+}
+
+.cd-app .cd-app-top-menu > :last-child {
+  margin-inline-end: 0;
 }
 
 .cd-app .cd-app-main {
