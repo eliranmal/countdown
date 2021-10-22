@@ -32,14 +32,15 @@ const iconPropMap = {
   cog: { ...baseIconProps, size: '55%' },
 }
 
-const Button = ({text = '', icon, tooltip, className, ...props}) => (<button
+const Button = ({text = '', icon, tooltip, className = '', ...props}) => (<button
   data-tip={tooltip}
   className={`cd-button ${className}`}
   {...props}
-  >{<Icon
+  >{icon ? <Icon
+    className="cd-button-icon"
     name={icon} {...(
       icon in iconPropMap ? iconPropMap[icon] : {}
-    )} />}{text}</button>)
+    )} /> : null}{text ? <span className="cd-button-text">{text}</span> : null}</button>)
 
 
 export default Button

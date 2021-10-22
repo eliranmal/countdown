@@ -1,14 +1,17 @@
 
 .cd-button {
+  --button-height: calc(1.5em + 5vmax);
+  --button-border-width: calc(.2em + .1vmax);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: calc(1.5em + 5vmax);
-  height: calc(1.5em + 5vmax);
+  min-width: var(--button-height);
+  height: var(--button-height);
   padding: 0;
-  border: calc(.2em + .1vmax) solid var(--redhat);
-  border-radius: 50%;
+  border: var(--button-border-width) solid var(--redhat);
+  border-radius: calc((var(--button-height) + var(--button-border-width) * 2) * .5);
   line-height: 0;
+  color: #ccc;
   background-color: var(--black);
   cursor: pointer;
   opacity: .7;
@@ -17,4 +20,22 @@
 .cd-button:hover {
   animation: spin .5s ease-in-out;
   animation-fill-mode: both;
+}
+
+.cd-button-icon {
+  --button-icon-size: calc(var(--button-height) - var(--button-border-width) * 2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--button-icon-size);
+  height: var(--button-icon-size);
+}
+
+.cd-button-text {
+  padding: 0 .5em;
+  font: bold calc(1em + 3vmax) Georgia, "Times New Roman", Times, serif;
+}
+
+.cd-button-icon + .cd-button-text {
+  padding: 0 .5em 0 0;
 }
