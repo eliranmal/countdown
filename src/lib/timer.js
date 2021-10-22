@@ -17,7 +17,9 @@ const init = ({
   const resolveLaps = () => events
     .reduce((accum, {type, timestamp}, index, arr) => {
       const {type: prevType, timestamp: prevTimestamp} = arr[index - 1] ?? {}
-      if (prevType === 'lap' && ['lap', 'stop', 'pause'].includes(type)) {
+      if (
+          (prevType === 'start' && type === 'lap') ||
+          (prevType === 'lap' && ['lap', 'stop', 'pause'].includes(type))) {
         accum.push({
           endTime: timestamp,
           startTime: prevTimestamp,

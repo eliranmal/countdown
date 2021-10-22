@@ -65,7 +65,7 @@ const Timer = ({initialTime, lapThreshold}) => {
     />
   }
 
-
+  // todo - move keybinding into Button
   useKeyboard(({code}) => {
     switch (code) {
       case 32: // spacebar
@@ -100,20 +100,20 @@ const Timer = ({initialTime, lapThreshold}) => {
         {renderButton('clear', setUnmarshalledTimerState)}
       </nav>
 
-      <div className="cd-timer-laps">
-        {laps.map(({startTime, endTime, duration}, key, arr) => (<span
-          key={key}
+      <div className={`cd-timer-laps ${laps.length ? '' : 'cd-timer-laps-hidden'}`}>
+        {(lapsSum => laps.map(({startTime, endTime, duration}, index, arr) => (<span
+          key={index}
           className="cd-timer-lap"
           style={{
-            backgroundColor: colors[key],
-            paddingLeft: `${duration / (arr.reduce((accum, {duration}) => (accum += duration), 0) / 100)}%`
+            backgroundColor: index === 0 || colors[index],
+            paddingLeft: `${duration / (lapsSum / 100)}%`
           }}
           data-tip={`
 start time: ${new Date(startTime).toLocaleString()}<br/>
 end time: ${new Date(endTime).toLocaleString()}<br/>
 duration: ${durationAsString(duration)}<br/>`
           }
-          >&nbsp;</span>))}
+          >&nbsp;</span>))).call(null, laps.reduce((accum, {duration}) => (accum += duration), 0))}
       </div>
     </div>
   );

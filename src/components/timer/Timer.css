@@ -37,7 +37,13 @@
   display: flex;
   justify-content: stretch;
   align-items: stretch;
-  transition: all 1s ease-in-out;
+  transition-property: padding, bottom;
+  transition-duration: .667s;
+  transition-timing-function: ease-in-out;
+}
+
+.cd-timer-laps-hidden {
+  bottom: calc(var(--laps-height) * -1);
 }
 
 .cd-timer-lap {
@@ -46,7 +52,7 @@
   padding: 0;
   background-color: #fff;
   opacity: .5;
-  transition: padding 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 .cd-timer-lap:last-of-type {
@@ -80,4 +86,8 @@
                 calc(var(--laps-height) * .667)
                 calc(var(--laps-height) * 2.667);
   background-color: transparent;
+}
+.cd-timer-lap:first-of-type:before,
+.cd-timer-lap:first-of-type:after {
+  content: none;
 }
