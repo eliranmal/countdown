@@ -31,6 +31,7 @@
   --laps-height: 3vmin;
   position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%;
   height: var(--laps-height);
   display: flex;
