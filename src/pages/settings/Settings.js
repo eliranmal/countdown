@@ -7,6 +7,7 @@ const Settings = ({timerThreshold, setTimerThreshold, timerDuration, setTimerDur
 
   const renderTimeSegmentInput = (segmentKey, timeObj, onChange) => (<input type="number"
     className={`cd-settings-input cd-settings-input-${segmentKey}`}
+    key={segmentKey}
     value={timeObj[segmentKey]}
     onChange={onChange} />)
 
