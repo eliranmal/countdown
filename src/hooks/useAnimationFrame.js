@@ -1,5 +1,5 @@
-
 import {useEffect} from 'react'
+
 
 const useAnimationFrame = (tickCallback = () => {}, stopPredicate = () => 1, dependencies) => {
   useEffect(() => {
@@ -15,5 +15,6 @@ const useAnimationFrame = (tickCallback = () => {}, stopPredicate = () => 1, dep
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies)
 }
+
 
 export default useAnimationFrame

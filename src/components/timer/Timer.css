@@ -1,4 +1,8 @@
 
+.cd-timer {
+  --laps-height: 3vmin;
+}
+
 .cd-timer-time-display {
   display: flex;
   justify-content: stretch;
@@ -25,10 +29,22 @@
 }
 
 
+/* notification box */
+
+.cd-timer-notification {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--laps-height) * 2);
+  pointer-events: none;
+  /* todo - background-image: vinil record! */
+}
+
+
 /* laps display */
 
 .cd-timer-laps {
-  --laps-height: 3vmin;
   position: absolute;
   bottom: 0;
   left: 0;

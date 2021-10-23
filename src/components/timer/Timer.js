@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import useLocalStorage from 'use-local-storage'
+import ReactTooltip from 'react-tooltip'
 
 import useKeyboard from '../../hooks/useKeyboard'
+import useAnimationEvent from '../../hooks/useAnimationEvent'
 import useAnimationFrame from '../../hooks/useAnimationFrame'
 import timer from '../../lib/timer'
 import {flatMap as colors} from '../../lib/colors'
@@ -47,6 +49,8 @@ const Timer = ({initialTime, lapThreshold}) => {
     clear: 'io',
   }
 
+  let tooltipHandleRef = React.createRef()
+
   const renderButton = (command, callback = patchUnmarshalledTimerState) => {
     const isLapStarted = command === 'lap' &&
       (timerEvents[timerEvents.length - 1] || {}).type === 'lap'
@@ -81,6 +85,13 @@ const Timer = ({initialTime, lapThreshold}) => {
     }
   })
 
+  useAnimationEvent(
+    'pulse',
+    () => ReactTooltip.show(tooltipHandleRef),
+    () => ReactTooltip.hide(tooltipHandleRef),
+    [tooltipHandleRef]
+  )
+
   useAnimationFrame(
     () => setEllapsedTime(countdownTimer.getEllapsedTimeString()),
     () => !timerState.running || timerState.paused,
@@ -100,6 +111,12 @@ const Timer = ({initialTime, lapThreshold}) => {
         {renderButton('clear', setUnmarshalledTimerState)}
       </nav>
 
+      <div
+        ref={ref => (tooltipHandleRef = ref)}
+        className="cd-timer-notification"
+        data-tip="lap threshold reached"
+        data-place="top"
+      ></div>
       <div className={`cd-timer-laps ${laps.length ? '' : 'cd-timer-laps-hidden'}`}>
         {(lapsSum => laps.map(({startTime, endTime, duration}, index, arr) => (<span
           key={index}
