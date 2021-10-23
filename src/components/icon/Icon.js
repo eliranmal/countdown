@@ -11,7 +11,7 @@ const resolveColor = color => color === true ?
   colors.next().value :
     color || 'var(--redhat)'
 
-const Icon = ({ name, color, size = '24px', style = {}, className }) => (<ReactSVG
+const Icon = ({ name, color, size = '24px', style = {}, className = '' }) => (<ReactSVG
     src={require(`../../images/icons/${name}.svg`).default}
     className={`cd-icon ${className}`}
     style={{
