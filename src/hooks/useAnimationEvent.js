@@ -17,6 +17,7 @@ const useAnimationEvent = (name, onStart = () => {}, onEnd = () => {}, dependenc
       document.removeEventListener('animationstart', onAnimationStart)
       document.removeEventListener('animationend', onAnimationEnd)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies)
 }
 

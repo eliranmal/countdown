@@ -52,7 +52,7 @@ const init = ({
 
   const command = (type, actionFn = () => {}, eventPredicate = () => 1) => (time = Date.now()) => {
     actionFn(time)
-    eventPredicate() && events.push({
+    return eventPredicate() && events.push({
       type,
       timestamp: time,
     })

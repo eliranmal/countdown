@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import useLocalStorage from 'use-local-storage'
 import ReactTooltip from 'react-tooltip'
 
@@ -25,8 +25,11 @@ const Timer = ({initialTime, lapThreshold}) => {
     threshold: mapAsDuration(lapThreshold),
   }, timerState, timerEvents)
 
+  const [notification, setNotification] = useState('')
   const [laps, setLaps] = useState(countdownTimer.getLaps() ?? [])
+  const [isThresholdAnimationActive, setThresholdAnimationActive] = useState(false)
   const [ellapsedTime, setEllapsedTime] = useState(countdownTimer.getEllapsedTimeString())
+
 
   const patchUnmarshalledTimerState = () => {
     setTimerState({...timerState, ...countdownTimer.getState()})
@@ -41,33 +44,21 @@ const Timer = ({initialTime, lapThreshold}) => {
   }
 
   const commandIconMap = {
+    clear: 'io',
+    stop: 'stop',
     start: 'play',
+    lap: 'rotate',
     pause: 'pause',
     resume: 'eject',
-    stop: 'stop',
-    lap: 'rotate',
-    clear: 'io',
   }
 
-  let tooltipHandleRef = React.createRef()
-
-  const renderButton = (command, callback = patchUnmarshalledTimerState) => {
-    const isLapStarted = command === 'lap' &&
-      (timerEvents[timerEvents.length - 1] || {}).type === 'lap'
-
-    return <Button
+  const renderButton = (command, callback = patchUnmarshalledTimerState, props) => (<Button
       icon={commandIconMap[command]}
       tooltip={command}
-      className={`cd-timer-button ${isLapStarted ? 'cd-animation-pulse' : ''}`}
-      style={isLapStarted ? {
-        '--pulse-delay': `${mapAsDuration(lapThreshold)}ms`,
-      } : null}
-      onMouseDown={() => {
-        countdownTimer[command] && countdownTimer[command]()
-        callback()
-      }}
-    />
-  }
+      className={'cd-timer-button'}
+      onMouseDown={() => countdownTimer[command] && countdownTimer[command]() && callback()}
+      {...props}
+    />)
 
   // todo - move keybinding into Button
   useKeyboard(({code}) => {
@@ -87,9 +78,11 @@ const Timer = ({initialTime, lapThreshold}) => {
 
   useAnimationEvent(
     'pulse',
-    () => ReactTooltip.show(tooltipHandleRef),
-    () => ReactTooltip.hide(tooltipHandleRef),
-    [tooltipHandleRef]
+    () => setNotification('lap threshold reached'),
+    () => {
+      setNotification('')
+      setThresholdAnimationActive(false)
+    },
   )
 
   useAnimationFrame(
@@ -107,16 +100,24 @@ const Timer = ({initialTime, lapThreshold}) => {
             timerState.paused ? 'resume' : 'pause' :
               'start')}
         {renderButton('stop')}
-        {renderButton('lap')}
+        {renderButton('lap', () => {
+          patchUnmarshalledTimerState()
+          setThresholdAnimationActive(true)
+          setNotification('lap started, waiting for threshold...')
+          ReactTooltip.rebuild()
+        }, { style: {
+            animation: isThresholdAnimationActive ? `pulse 4s linear ${mapAsDuration(lapThreshold)}ms` : void 0,
+          }}
+        )}
         {renderButton('clear', setUnmarshalledTimerState)}
       </nav>
 
-      <div
-        ref={ref => (tooltipHandleRef = ref)}
-        className="cd-timer-notification"
-        data-tip="lap threshold reached"
-        data-place="top"
-      ></div>
+      <span className={
+          `cd-timer-laps-spinner ${(timerEvents[timerEvents.length - 1] || {}).type === 'lap' ?
+            'cd-timer-laps-spinner-active' : ''}`
+          }
+        ><span className="cd-timer-laps-notification">{notification}</span></span>
+
       <div className={`cd-timer-laps ${laps.length ? '' : 'cd-timer-laps-hidden'}`}>
         {(lapsSum => laps.map(({startTime, endTime, duration}, index, arr) => (<span
           key={index}
@@ -130,7 +131,7 @@ start time: ${new Date(startTime).toLocaleString()}<br/>
 end time: ${new Date(endTime).toLocaleString()}<br/>
 duration: ${durationAsString(duration)}<br/>`
           }
-          >&nbsp;</span>))).call(null, laps.reduce((accum, {duration}) => (accum += duration), 0))}
+          ></span>))).call(null, laps.reduce((accum, {duration}) => (accum += duration), 0))}
       </div>
     </div>
   );

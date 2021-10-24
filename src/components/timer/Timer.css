@@ -1,6 +1,9 @@
 
 .cd-timer {
-  --laps-height: 3vmin;
+  --timer-laps-height: 3vmin;
+  --timer-spinner-size: calc(var(--timer-laps-height) * 3);
+  --timer-spinner-border-width: calc(var(--timer-spinner-size) * .07);
+  --timer-spinner-offset: calc(var(--timer-laps-height) - var(--timer-spinner-border-width));
 }
 
 .cd-timer-time-display {
@@ -31,14 +34,61 @@
 
 /* notification box */
 
-.cd-timer-notification {
+.cd-timer-laps-spinner,
+.cd-timer-laps-spinner:before,
+.cd-timer-laps-spinner:after {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: calc(var(--laps-height) * 2);
-  pointer-events: none;
-  /* todo - background-image: vinil record! */
+  display: block;
+  width: var(--timer-spinner-size);
+  height: var(--timer-spinner-size);
+  border-radius: 50%;
+}
+
+.cd-timer-laps-spinner {
+  --timer-spinner-interval: 3.33s;
+
+  z-index: 9;
+  bottom: var(--timer-spinner-offset);
+  right: var(--timer-spinner-offset);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  border: calc(var(--timer-spinner-border-width) * .5) dotted #999;
+}
+
+.cd-timer-laps-spinner:before {
+  content: '';
+  box-sizing: content-box;
+  border: var(--timer-spinner-border-width) dotted #666;
+}
+
+.cd-timer-laps-spinner:after {
+  content: '';
+  box-sizing: border-box;
+  background: #000 url('../../images/vinyl-record.svg') 50% 50% no-repeat;
+  background-size: 140%;
+}
+
+.cd-timer-laps-spinner.cd-timer-laps-spinner-active:before {
+  animation: var(--timer-spinner-interval) linear infinite spin;
+}
+
+.cd-timer-laps-spinner.cd-timer-laps-spinner-active:after {
+  animation: var(--timer-spinner-interval) ease-out infinite jitter;
+  animation-fill-mode: both;
+}
+
+.cd-timer-laps-notification {
+  position: absolute;
+  bottom: calc((var(--timer-spinner-offset) * 4) + var(--timer-spinner-size));
+  right: var(--timer-spinner-offset);
+  display: block;
+  white-space: nowrap;
+  font-size: .8em;
+  font-weight: 100;
+  font-style: italic;
+  color: #ccc;
 }
 
 
@@ -46,20 +96,20 @@
 
 .cd-timer-laps {
   position: absolute;
-  bottom: 0;
+  bottom: calc(var(--timer-laps-height) * 2);
   left: 0;
-  width: 100%;
-  height: var(--laps-height);
+  right: calc(var(--timer-spinner-offset) + var(--timer-spinner-size));
+  height: var(--timer-laps-height);
   display: flex;
   justify-content: stretch;
   align-items: stretch;
-  transition-property: padding, bottom;
+  transition-property: padding, left;
   transition-duration: .667s;
   transition-timing-function: ease-in-out;
 }
 
 .cd-timer-laps-hidden {
-  bottom: calc(var(--laps-height) * -1);
+  left: 100%;
 }
 
 .cd-timer-lap {
@@ -69,10 +119,6 @@
   background-color: #fff;
   opacity: .5;
   transition: all 1s ease-in-out;
-}
-
-.cd-timer-lap:last-of-type {
-  border-right: 0 none;
 }
 
 /* a little pseudo flag for each lap :) */
@@ -86,21 +132,21 @@
   background-color: #fff;
 }
 .cd-timer-lap:before {
-    height: calc(var(--laps-height) * 3.333);
-    width: calc(var(--laps-height) * .1);
+    height: calc(var(--timer-laps-height) * 3.333);
+    width: calc(var(--timer-laps-height) * .1);
     z-index: 1;
 }
 .cd-timer-lap:after {
   box-sizing: border-box;
-  bottom: calc(var(--laps-height) * 2);
-  width: calc(var(--laps-height) * 2.667);
-  height: calc(var(--laps-height) * 1.333);
+  bottom: calc(var(--timer-laps-height) * 2);
+  width: calc(var(--timer-laps-height) * 2.667);
+  height: calc(var(--timer-laps-height) * 1.333);
   border-color: transparent transparent transparent red;
   border-style: solid;
-  border-width: calc(var(--laps-height) * .667)
-                calc(var(--laps-height) * 0)
-                calc(var(--laps-height) * .667)
-                calc(var(--laps-height) * 2.667);
+  border-width: calc(var(--timer-laps-height) * .667)
+                calc(var(--timer-laps-height) * 0)
+                calc(var(--timer-laps-height) * .667)
+                calc(var(--timer-laps-height) * 2.667);
   background-color: transparent;
 }
 .cd-timer-lap:first-of-type:before,
