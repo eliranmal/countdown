@@ -26,15 +26,28 @@ const Settings = ({timerThreshold, setTimerThreshold, timerDuration, setTimerDur
 
   return (
     <div className="cd-settings">
-      <label className="cd-settings-label">threshold</label>
-      <div className="cd-settings-box">
-        {['hours', 'minutes', 'seconds', 'milliseconds']
-            .map(renderThresholdTimeSegmentInput)}
-      </div>
-      <label className="cd-settings-label">duration</label>
-      <div className="cd-settings-box">
-        {['hours', 'minutes', 'seconds', 'milliseconds']
-            .map(renderDurationTimeSegmentInput)}
+      {/* todo - the wrapper is part of the modal behavior; extract a modal component! */}
+      <div className="cd-settings-wrapper">
+        <div
+          className="cd-settings-field"
+          data-tip="sets the initial time for the timer (hours / minutes / seconds / milliseconds)"
+          >
+          <label className="cd-settings-label">initial duration</label>
+          <div className="cd-settings-input-box">
+            {['hours', 'minutes', 'seconds', 'milliseconds']
+              .map(renderDurationTimeSegmentInput)}
+          </div>
+        </div>
+        <div
+          className="cd-settings-field"
+          data-tip="a notification will be shown every time a lap exceeds this value (hours / minutes / seconds / milliseconds)"
+          >
+          <label className="cd-settings-label">lap threshold</label>
+          <div className="cd-settings-input-box">
+            {['hours', 'minutes', 'seconds', 'milliseconds']
+              .map(renderThresholdTimeSegmentInput)}
+          </div>
+        </div>
       </div>
     </div>
   );
