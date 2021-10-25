@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import useLocalStorage from 'use-local-storage'
 import ReactTooltip from 'react-tooltip'
 
@@ -27,6 +27,9 @@ const App = () => {
 
   const [isSettingsVisible, setSettingsVisible] = useState(false)
 
+  useEffect(() => {
+    ReactTooltip.rebuild()
+  }, [isSettingsVisible])
 
   return (
     <div className="cd-app">
@@ -54,17 +57,14 @@ const App = () => {
           setTimerDuration={setTimerDuration}
           setTimerThreshold={setTimerThreshold}
           setTimerDirection={setTimerDirection}
-        />) : (
-        <main className="cd-app-main">
-          <Timer
-            initialTime={timerDuration}
-            lapThreshold={timerThreshold}
-            direction={timerDirection}
-            />
-        </main>
+        />) : (<Timer
+          initialTime={timerDuration}
+          lapThreshold={timerThreshold}
+          direction={timerDirection}
+        />
       )}
     </div>
-  );
+  )
 }
 
 

@@ -11,6 +11,7 @@
   justify-content: stretch;
   align-items: stretch;
   margin: 0;
+  margin-top: -15vmin;
   line-height: 2;
   font-size: calc(10vw - (1vmax - 3vmin));
   font-family: consolas, "Courier New", monospace;
