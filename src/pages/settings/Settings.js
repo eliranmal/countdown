@@ -57,12 +57,12 @@ const Settings = ({
         </div>
         <div
           className="cd-settings-field"
-          data-tip="whether to count backwards (the default) or forwards. experimental"
+          data-tip="whether to count backwards (the default) or forwards. experimental!"
           >
           <label
             className="cd-settings-label"
             htmlFor="cd-settings-input-direction"
-            >timer direction</label>
+            >direction</label>
           <input
             className="cd-settings-input"
             type="checkbox"

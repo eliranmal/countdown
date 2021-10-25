@@ -8,8 +8,9 @@
 }
 
 .cd-settings {
+  --cd-settings-pad: calc(1.5em + 2.5vmax);
   position: absolute;
-  margin: 3em;
+  margin: var(--cd-settings-pad);
   color: #ccc;
   background-color: #444;
   opacity: .7;
@@ -21,7 +22,7 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  padding: 3em;
+  padding: var(--cd-settings-pad);
 }
 
 .cd-settings-field,
