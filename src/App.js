@@ -23,8 +23,9 @@ const App = () => {
     seconds: 12,
     milliseconds: 345,
   })
+  const [timerDirection, setTimerDirection] = useLocalStorage('timer-direction')
 
-  const [editMode, setEditMode] = useState(false)
+  const [isSettingsVisible, setSettingsVisible] = useState(false)
 
 
   return (
@@ -42,20 +43,23 @@ const App = () => {
       <div className="cd-app-top-menu">
         <Button
           icon="cog"
-          tooltip={`${editMode ? 'hide ' : 'show '}settings`}
-          onClick={() => setEditMode(!editMode)}
+          tooltip={`${isSettingsVisible ? 'hide ' : 'show '}settings`}
+          onClick={() => setSettingsVisible(!isSettingsVisible)}
         />
       </div>
-      {editMode ? (<Settings
+      {isSettingsVisible ? (<Settings
           timerDuration={timerDuration}
           timerThreshold={timerThreshold}
+          timerDirection={timerDirection}
           setTimerDuration={setTimerDuration}
           setTimerThreshold={setTimerThreshold}
+          setTimerDirection={setTimerDirection}
         />) : (
         <main className="cd-app-main">
           <Timer
             initialTime={timerDuration}
             lapThreshold={timerThreshold}
+            direction={timerDirection}
             />
         </main>
       )}

@@ -14,13 +14,13 @@ import Button from '../button/Button'
 import './Timer.css'
 
 
-const Timer = ({initialTime, lapThreshold}) => {
+const Timer = ({initialTime, lapThreshold, direction}) => {
 
   const [timerState, setTimerState] = useLocalStorage('timer-state', {})
   const [timerEvents, setTimerEvents] = useLocalStorage('timer-events', [])
 
   const countdownTimer = timer({
-    direction: 'down',
+    direction,
     duration: mapAsDuration(initialTime),
     threshold: mapAsDuration(lapThreshold),
   }, timerState, timerEvents)

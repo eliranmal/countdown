@@ -3,7 +3,14 @@ import React from 'react'
 import './Settings.css'
 
 
-const Settings = ({timerThreshold, setTimerThreshold, timerDuration, setTimerDuration}) => {
+const Settings = ({
+  timerDuration,
+  timerThreshold,
+  timerDirection,
+  setTimerDuration,
+  setTimerThreshold,
+  setTimerDirection,
+}) => {
 
   const renderTimeSegmentInput = (segmentKey, timeObj, onChange) => (<input type="number"
     className={`cd-settings-input cd-settings-input-${segmentKey}`}
@@ -47,6 +54,23 @@ const Settings = ({timerThreshold, setTimerThreshold, timerDuration, setTimerDur
             {['hours', 'minutes', 'seconds', 'milliseconds']
               .map(renderThresholdTimeSegmentInput)}
           </div>
+        </div>
+        <div
+          className="cd-settings-field"
+          data-tip="whether to count backwards (the default) or forwards. experimental"
+          >
+          <label
+            className="cd-settings-label"
+            htmlFor="cd-settings-input-direction"
+            >timer direction</label>
+          <input
+            className="cd-settings-input"
+            type="checkbox"
+            id="cd-settings-input-direction"
+            data-checked="up"
+            data-unchecked="down"
+            onChange={e => setTimerDirection(e.target.checked ? 'up' : 'down')}
+            />
         </div>
       </div>
     </div>
