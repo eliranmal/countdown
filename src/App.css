@@ -57,12 +57,17 @@ body {
   transform-origin: 0 0;
 }
 
-.cd-app .cd-app-top-menu > * {
+.cd-app .cd-app-top-menu .cd-app-top-menu-item {
   margin-inline-end: calc(.5em + 1vmax);
 }
 
-.cd-app .cd-app-top-menu > :last-child {
+.cd-app .cd-app-top-menu .cd-app-top-menu-item:last-child {
   margin-inline-end: 0;
+}
+
+.cd-app .cd-app-top-menu .cd-app-top-menu-item:hover {
+  animation: .5s ease-in-out spin;
+  animation-fill-mode: both;
 }
 
 

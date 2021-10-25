@@ -31,6 +31,7 @@ const App = () => {
     ReactTooltip.rebuild()
   }, [isSettingsVisible])
 
+
   return (
     <div className="cd-app">
       <ReactTooltip
@@ -45,6 +46,7 @@ const App = () => {
       </header>
       <div className="cd-app-top-menu">
         <Button
+          className="cd-app-top-menu-item"
           icon="cog"
           tooltip={`${isSettingsVisible ? 'hide ' : 'show '}settings`}
           onClick={() => setSettingsVisible(!isSettingsVisible)}

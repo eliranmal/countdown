@@ -17,9 +17,9 @@
   opacity: .7;
 }
 
-.cd-button:hover {
-  animation: spin .5s ease-in-out;
-  animation-fill-mode: both;
+.cd-button:active {
+  background-color: #222;
+  opacity: .9;
 }
 
 .cd-button-icon {
