@@ -2,7 +2,7 @@
 .cd-timer {
   --timer-laps-height: 3vmin;
   --timer-spinner-size: calc(var(--timer-laps-height) * 3);
-  --timer-spinner-border-width: calc(var(--timer-spinner-size) * .07);
+  --timer-spinner-border-width: calc(var(--timer-spinner-size) * .075);
   --timer-spinner-offset: calc(var(--timer-laps-height) - var(--timer-spinner-border-width));
 }
 
@@ -55,13 +55,13 @@
   align-items: center;
   justify-content: center;
   box-sizing: content-box;
-  border: calc(var(--timer-spinner-border-width) * .75) dotted #999;
+  border: var(--timer-spinner-border-width) dotted #333;
 }
 
 .cd-timer-laps-spinner:before {
   content: '';
   box-sizing: content-box;
-  border: var(--timer-spinner-border-width) dotted #666;
+  border: calc(var(--timer-spinner-border-width) * .5) dotted #666;
 }
 
 .cd-timer-laps-spinner:after {
