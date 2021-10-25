@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import useLocalStorage from 'use-local-storage'
 import ReactTooltip from 'react-tooltip'
 
@@ -90,6 +90,10 @@ const Timer = ({initialTime, lapThreshold, direction}) => {
     () => !timerState.running || timerState.paused,
     [timerState.running, timerState.paused])
 
+  useEffect(() => {
+    ReactTooltip.rebuild()
+  }, [timerState])
+
 
   return (
     <div className="cd-timer">
@@ -104,7 +108,6 @@ const Timer = ({initialTime, lapThreshold, direction}) => {
           patchUnmarshalledTimerState()
           setThresholdAnimationActive(true)
           setNotification('lap started, waiting for threshold...')
-          ReactTooltip.rebuild()
         }, { style: {
             animation: isThresholdAnimationActive ? `pulse 4s linear ${mapAsDuration(lapThreshold)}ms` : void 0,
           }}
