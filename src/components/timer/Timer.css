@@ -55,7 +55,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: content-box;
-  border: calc(var(--timer-spinner-border-width) * .5) dotted #999;
+  border: calc(var(--timer-spinner-border-width) * .75) dotted #999;
 }
 
 .cd-timer-laps-spinner:before {
@@ -107,6 +107,16 @@
   transition-property: padding, left;
   transition-duration: .667s;
   transition-timing-function: ease-in-out;
+}
+
+.cd-timer-laps:after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  display: inline-block;
+  width: 5em;
+  height: 100%;
+  background-color: var(--black);
 }
 
 .cd-timer-laps-hidden {
