@@ -11,7 +11,7 @@ the timer has an accurate implementation that ~fights~ ignores the inherent time
 
 it's built using [react.js][reactjs-website], and deployed with the help of [gh-pages][gh-pages-repo].
 
-this project is a part of my [job application][job-application-image] process at [redhat][redhat-website].
+this project is part of my [job application][job-application-image] process at [redhat][redhat-website].
 
 
 ## development
