@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/countdown/static/css/main.9a54f2a9.chunk.css",
-    "main.js": "/countdown/static/js/main.cf2b544f.chunk.js",
-    "main.js.map": "/countdown/static/js/main.cf2b544f.chunk.js.map",
-    "runtime-main.js": "/countdown/static/js/runtime-main.ec00a84a.js",
-    "runtime-main.js.map": "/countdown/static/js/runtime-main.ec00a84a.js.map",
-    "static/js/2.cdaf2345.chunk.js": "/countdown/static/js/2.cdaf2345.chunk.js",
-    "static/js/2.cdaf2345.chunk.js.map": "/countdown/static/js/2.cdaf2345.chunk.js.map",
-    "static/js/3.418feb15.chunk.js": "/countdown/static/js/3.418feb15.chunk.js",
-    "static/js/3.418feb15.chunk.js.map": "/countdown/static/js/3.418feb15.chunk.js.map",
+    "main.js": "/countdown/static/js/main.ce5da068.chunk.js",
+    "main.js.map": "/countdown/static/js/main.ce5da068.chunk.js.map",
+    "runtime-main.js": "/countdown/static/js/runtime-main.8ffe185f.js",
+    "runtime-main.js.map": "/countdown/static/js/runtime-main.8ffe185f.js.map",
+    "static/js/2.053d3eee.chunk.js": "/countdown/static/js/2.053d3eee.chunk.js",
+    "static/js/2.053d3eee.chunk.js.map": "/countdown/static/js/2.053d3eee.chunk.js.map",
+    "static/js/3.4d273f6b.chunk.js": "/countdown/static/js/3.4d273f6b.chunk.js",
+    "static/js/3.4d273f6b.chunk.js.map": "/countdown/static/js/3.4d273f6b.chunk.js.map",
     "index.html": "/countdown/index.html",
     "service-worker.js": "/countdown/service-worker.js",
     "service-worker.js.map": "/countdown/service-worker.js.map",
     "static/css/main.9a54f2a9.chunk.css.map": "/countdown/static/css/main.9a54f2a9.chunk.css.map",
-    "static/js/2.cdaf2345.chunk.js.LICENSE.txt": "/countdown/static/js/2.cdaf2345.chunk.js.LICENSE.txt",
+    "static/js/2.053d3eee.chunk.js.LICENSE.txt": "/countdown/static/js/2.053d3eee.chunk.js.LICENSE.txt",
     "static/media/App.css": "/countdown/static/media/banner.6be1aea1.png",
     "static/media/cog.svg": "/countdown/static/media/cog.e2313a2c.svg",
     "static/media/eject.svg": "/countdown/static/media/eject.354fd176.svg",
@@ -25,9 +25,9 @@
     "static/media/Timer.css": "/countdown/static/media/vinyl-record.413a2744.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.ec00a84a.js",
-    "static/js/2.cdaf2345.chunk.js",
+    "static/js/runtime-main.8ffe185f.js",
+    "static/js/2.053d3eee.chunk.js",
     "static/css/main.9a54f2a9.chunk.css",
-    "static/js/main.cf2b544f.chunk.js"
+    "static/js/main.ce5da068.chunk.js"
   ]
 }
