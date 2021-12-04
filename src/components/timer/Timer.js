@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import useLocalStorage from 'use-local-storage'
 import ReactTooltip from 'react-tooltip'
 
@@ -19,11 +19,11 @@ const Timer = ({initialTime, lapThreshold, direction}) => {
   const [timerState, setTimerState] = useLocalStorage('timer-state', {})
   const [timerEvents, setTimerEvents] = useLocalStorage('timer-events', [])
 
-  const countdownTimer = timer({
+  const countdownTimer = useRef(timer({
     direction,
     duration: mapAsDuration(initialTime),
     threshold: mapAsDuration(lapThreshold),
-  }, timerState, timerEvents)
+  }, timerState, timerEvents)).current
 
   const [notification, setNotification] = useState('')
   const [laps, setLaps] = useState(countdownTimer.getLaps() ?? [])
@@ -87,8 +87,8 @@ const Timer = ({initialTime, lapThreshold, direction}) => {
 
   useAnimationFrame(
     () => setEllapsedTime(countdownTimer.getEllapsedTimeString()),
-    () => !timerState.running || timerState.paused,
-    [timerState.running, timerState.paused])
+    () => !timerState.running || timerState.paused
+  )
 
   useEffect(() => {
     ReactTooltip.rebuild()
