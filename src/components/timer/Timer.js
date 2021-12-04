@@ -1,10 +1,10 @@
 import React, {useRef, useState, useEffect} from 'react'
 import useLocalStorage from 'use-local-storage'
+import {useAnimationFrame} from '@eliranmal/react-hooks'
 import ReactTooltip from 'react-tooltip'
 
 import useKeyboard from '../../hooks/useKeyboard'
 import useAnimationEvent from '../../hooks/useAnimationEvent'
-import useAnimationFrame from '../../hooks/useAnimationFrame'
 import timer from '../../lib/timer'
 import {flatMap as colors} from '../../lib/colors'
 import {mapAsDuration, durationAsString} from '../../lib/util'

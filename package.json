@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://eliranmal.github.io/countdown/",
   "dependencies": {
+    "@eliranmal/react-hooks": "^0.1.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
