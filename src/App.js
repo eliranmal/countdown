@@ -23,7 +23,7 @@ const App = () => {
     seconds: 12,
     milliseconds: 345,
   })
-  const [timerDirection, setTimerDirection] = useLocalStorage('timer-direction')
+  const [timerDirection, setTimerDirection] = useLocalStorage('timer-direction', 'down')
 
   const [isSettingsVisible, setSettingsVisible] = useState(false)
 
