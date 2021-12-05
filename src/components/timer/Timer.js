@@ -1,13 +1,16 @@
 import React, {useRef, useState, useEffect} from 'react'
 import useLocalStorage from 'use-local-storage'
-import {useAnimationFrame} from '@eliranmal/react-hooks'
+import {
+  useAnimationFrame,
+  useKeyboard,
+  mapKeyboardEvents,
+} from '@eliranmal/react-hooks'
 import ReactTooltip from 'react-tooltip'
 
-import useKeyboard from '../../hooks/useKeyboard'
-import useAnimationEvent from '../../hooks/useAnimationEvent'
 import timer from '../../lib/timer'
 import {flatMap as colors} from '../../lib/colors'
 import {mapAsDuration, durationAsString} from '../../lib/util'
+import useAnimationEvent from '../../hooks/useAnimationEvent'
 
 import Button from '../button/Button'
 
@@ -60,21 +63,18 @@ const Timer = ({initialTime, lapThreshold, direction}) => {
       {...props}
     />)
 
-  // todo - move keybinding into Button
-  useKeyboard(({code}) => {
-    switch (code) {
-      case 32: // spacebar
-        countdownTimer.lap()
-        patchUnmarshalledTimerState()
-        break
-      case 8: // backspace
-        countdownTimer.abortLap()
-        patchUnmarshalledTimerState()
-        break
-      default:
-        break
-    }
-  })
+  useKeyboard(mapKeyboardEvents([
+    // spacebar
+    [32, () => {
+      countdownTimer.lap()
+      patchUnmarshalledTimerState()
+    }],
+    // backspace
+    [8, () => {
+      countdownTimer.abortLap()
+      patchUnmarshalledTimerState()
+    }],
+  ]))
 
   useAnimationEvent(
     'pulse',
